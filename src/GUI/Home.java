@@ -33,11 +33,52 @@ public class Home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BasePanel = new javax.swing.JPanel();
+        NavigationPanel = new javax.swing.JPanel();
+        btnMainHome = new javax.swing.JButton();
+        MainPanel = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        BasePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        NavigationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        btnMainHome.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Home-icon.png"))); // NOI18N
+        btnMainHome.setText("Home");
+
+        javax.swing.GroupLayout NavigationPanelLayout = new javax.swing.GroupLayout(NavigationPanel);
+        NavigationPanel.setLayout(NavigationPanelLayout);
+        NavigationPanelLayout.setHorizontalGroup(
+            NavigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnMainHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        NavigationPanelLayout.setVerticalGroup(
+            NavigationPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NavigationPanelLayout.createSequentialGroup()
+                .addComponent(btnMainHome)
+                .addGap(0, 323, Short.MAX_VALUE))
+        );
+
+        MainPanel.setLayout(new java.awt.CardLayout());
+
+        javax.swing.GroupLayout BasePanelLayout = new javax.swing.GroupLayout(BasePanel);
+        BasePanel.setLayout(BasePanelLayout);
+        BasePanelLayout.setHorizontalGroup(
+            BasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BasePanelLayout.createSequentialGroup()
+                .addComponent(NavigationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        BasePanelLayout.setVerticalGroup(
+            BasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(NavigationPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -51,11 +92,11 @@ public class Home extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(BasePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 279, Short.MAX_VALUE)
+            .addComponent(BasePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -97,6 +138,10 @@ public class Home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel BasePanel;
+    private javax.swing.JPanel MainPanel;
+    private javax.swing.JPanel NavigationPanel;
+    private javax.swing.JButton btnMainHome;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
