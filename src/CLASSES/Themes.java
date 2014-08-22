@@ -8,6 +8,7 @@ package CLASSES;
 
 import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -24,6 +25,8 @@ public class Themes {
                 UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
             else if (id==2)
                 UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
+            else if (id==3)
+                UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
         } 
         catch (Exception e) 
         {
