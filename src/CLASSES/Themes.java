@@ -8,6 +8,7 @@ package CLASSES;
 
 import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel;
+import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -17,22 +18,33 @@ import javax.swing.UIManager;
  * @author Suharsha Wick
  */
 public class Themes {
-    public void setTheme(int id) {
+    public boolean setTheme(int id) {
+        
         try 
         {
-            if (id==1)
+            if (id==1){
                 UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
-            else if (id==2)
+                return true;
+        }
+            else if (id==2){
                 UIManager.setLookAndFeel(new SyntheticaBlueMoonLookAndFeel());
+                    return true;
+        }
+            else if (id==3){
+                UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
+                return true;
+            }
         } 
         catch (Exception e) 
         {
             e.printStackTrace();
+            return false;
         }
-
+        return false;
     }
-    public void setIcon(JFrame j) {
+    public boolean setIcon(JFrame j) {
         j.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/IMAGES/favicon.png")));
+        return true;
     }
     
 }
