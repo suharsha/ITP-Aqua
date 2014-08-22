@@ -45,21 +45,30 @@ public class ThemesTest {
     @Test
     public void testSetTheme() {
         System.out.println("setTheme");
-        Themes theme = new Themes();
-                assertTrue(theme.setTheme(1));
-        fail("The test case is a prototype.");
+        int id1 = 1;
+        int id2 = 2;
+        int id3 = 3;
+        Themes instance = new Themes();
+        boolean expResult = true;
+        boolean result1 = instance.setTheme(id1);
+        assertEquals(expResult, result1);
+        boolean result2 = instance.setTheme(id2);
+        assertEquals(expResult, result2);
+        boolean result3 = instance.setTheme(id3);
+        assertEquals(expResult, result3);
     }
 
     /**
      * Test of setIcon method, of class Themes.
      */
- /*   @Test
+    @Test
     public void testSetIcon() {
         System.out.println("setIcon");
-        JFrame j = null;
-        Themes theme = new Themes();
-                assertTrue(theme.setIcon(j) );
-        fail("The test case is a prototype.");
-    } */
+        JFrame j = new JFrame();
+        Themes instance = new Themes();
+        boolean expResult = false;
+        boolean result = instance.setIcon(j);
+        assertEquals(expResult, result);
+    }
     
 }
