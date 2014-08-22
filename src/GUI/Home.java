@@ -19,7 +19,7 @@ public class Home extends javax.swing.JFrame {
      */
     public Home() {
         Themes theme = new Themes();
-        theme.setTheme(1);
+        theme.setTheme(1)
         theme.setIcon(this);
         initComponents();
     }
