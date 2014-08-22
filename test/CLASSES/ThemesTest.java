@@ -56,6 +56,7 @@ public class ThemesTest {
         assertEquals(expResult, result2);
         boolean result3 = instance.setTheme(id3);
         assertEquals(expResult, result3);
+        System.exit(-1);
     }
 
     /**
@@ -69,6 +70,7 @@ public class ThemesTest {
         boolean expResult = false;
         boolean result = instance.setIcon(j);
         assertEquals(expResult, result);
+        System.exit(-1);
     }
     
 }
