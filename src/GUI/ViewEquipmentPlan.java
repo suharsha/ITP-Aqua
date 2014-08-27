@@ -57,7 +57,7 @@ public class ViewEquipmentPlan extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Equipment Plan");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

@@ -3,24 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddBudget.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddClient.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewClientPayment.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddSupplierItem.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/EditClient.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/EditClientPayment.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/EditCommitteeMember.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewSupplierItem.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddEventFiles.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddClientPayment.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddCommitteeMember.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/CLASSES/Themes.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewClient.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/EditSupplierItem.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddEquipmentPlan.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddActivityPlan.java</file>
-            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewCommitteeMember.java</file>
+            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/AddSupplierPayment.java</file>
+            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewUser.java</file>
+            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/ViewSupplierPayment.java</file>
+            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/EditSupplierPayment.java</file>
             <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/GUI/Home.java</file>
+            <file>file:/C:/Users/Suharsha%20Wick/Documents/NetBeansProjects/ITPProject-AQUA/src/CLASSES/Themes.java</file>
         </group>
     </open-files>
 </project-private>

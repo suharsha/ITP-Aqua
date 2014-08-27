@@ -60,7 +60,7 @@ public class EditEquipmentPlan extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Edit Equipment Plan");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

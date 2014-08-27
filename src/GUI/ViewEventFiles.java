@@ -46,7 +46,7 @@ public class ViewEventFiles extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Event Files");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

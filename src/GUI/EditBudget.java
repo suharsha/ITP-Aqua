@@ -61,7 +61,7 @@ public class EditBudget extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Edit Budget");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
