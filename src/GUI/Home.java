@@ -249,8 +249,24 @@ public class Home extends javax.swing.JFrame {
         jScrollPane10 = new javax.swing.JScrollPane();
         jTable10 = new javax.swing.JTable();
         ClientsManagement = new javax.swing.JPanel();
-        jScrollPane11 = new javax.swing.JScrollPane();
-        jTable11 = new javax.swing.JTable();
+        jLabel23 = new javax.swing.JLabel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel4 = new javax.swing.JPanel();
+        jPanel39 = new javax.swing.JPanel();
+        clientDetailsDetails = new javax.swing.JButton();
+        clientDetailsEdit = new javax.swing.JButton();
+        clientDetailsView = new javax.swing.JButton();
+        clientDetailsAdd = new javax.swing.JButton();
+        jPanel40 = new javax.swing.JPanel();
+        homeSearch16 = new javax.swing.JTextField();
+        homeSearchTypes16 = new javax.swing.JComboBox();
+        btnhomeSearch16 = new javax.swing.JButton();
+        jComboBox35 = new javax.swing.JComboBox();
+        jComboBox36 = new javax.swing.JComboBox();
+        jButton88 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jPanel6 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         homeSearch10 = new javax.swing.JTextField();
         homeSearchTypes10 = new javax.swing.JComboBox();
@@ -258,12 +274,13 @@ public class Home extends javax.swing.JFrame {
         jComboBox23 = new javax.swing.JComboBox();
         jComboBox24 = new javax.swing.JComboBox();
         jButton64 = new javax.swing.JButton();
-        jLabel23 = new javax.swing.JLabel();
         jPanel24 = new javax.swing.JPanel();
-        jButton65 = new javax.swing.JButton();
-        jButton66 = new javax.swing.JButton();
-        jButton67 = new javax.swing.JButton();
-        jButton68 = new javax.swing.JButton();
+        comMemberDelete = new javax.swing.JButton();
+        comMemberEdit = new javax.swing.JButton();
+        comMemberView = new javax.swing.JButton();
+        comMemberAdd = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTable11 = new javax.swing.JTable();
         SuppliersManagement = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTable12 = new javax.swing.JTable();
@@ -2257,7 +2274,113 @@ public class Home extends javax.swing.JFrame {
 
         CardsPanel.add(SupplierPayments, "cSupplierPayments");
 
-        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel23.setBackground(new java.awt.Color(102, 102, 102));
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("CLIENTS MANAGEMENT");
+        jLabel23.setOpaque(true);
+
+        jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        clientDetailsDetails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
+        clientDetailsDetails.setText("Delete");
+
+        clientDetailsEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        clientDetailsEdit.setText("Edit");
+        clientDetailsEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientDetailsEditActionPerformed(evt);
+            }
+        });
+
+        clientDetailsView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        clientDetailsView.setText("View");
+        clientDetailsView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientDetailsViewActionPerformed(evt);
+            }
+        });
+
+        clientDetailsAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        clientDetailsAdd.setText("Add");
+        clientDetailsAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientDetailsAddActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
+        jPanel39.setLayout(jPanel39Layout);
+        jPanel39Layout.setHorizontalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
+                .addGap(0, 781, Short.MAX_VALUE)
+                .addComponent(clientDetailsAdd)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clientDetailsView)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clientDetailsEdit)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(clientDetailsDetails))
+        );
+        jPanel39Layout.setVerticalGroup(
+            jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel39Layout.createSequentialGroup()
+                .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(clientDetailsDetails)
+                    .addComponent(clientDetailsEdit)
+                    .addComponent(clientDetailsView)
+                    .addComponent(clientDetailsAdd))
+                .addGap(0, 7, Short.MAX_VALUE))
+        );
+
+        jPanel40.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
+
+        homeSearchTypes16.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Location", "Client" }));
+
+        btnhomeSearch16.setText("Search");
+
+        jComboBox35.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jComboBox36.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jButton88.setText("Sort");
+
+        javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
+        jPanel40.setLayout(jPanel40Layout);
+        jPanel40Layout.setHorizontalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(homeSearch16, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(homeSearchTypes16, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btnhomeSearch16)
+                .addGap(298, 298, 298)
+                .addComponent(jComboBox35, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox36, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton88)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+        jPanel40Layout.setVerticalGroup(
+            jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel40Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(homeSearch16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(homeSearchTypes16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnhomeSearch16)
+                    .addComponent(jComboBox35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton88))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2268,7 +2391,33 @@ public class Home extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane11.setViewportView(jTable11);
+        jScrollPane4.setViewportView(jTable4);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel39, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel40, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Client Details", jPanel4);
 
         jPanel23.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
@@ -2299,7 +2448,7 @@ public class Home extends javax.swing.JFrame {
                 .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton64)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2315,51 +2464,98 @@ public class Home extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel23.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel23.setText("CLIENTS MANAGEMENT");
-        jLabel23.setOpaque(true);
-
         jPanel24.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
-        jButton65.setText("Delete");
+        comMemberDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
+        comMemberDelete.setText("Delete");
 
-        jButton66.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
-        jButton66.setText("Edit");
+        comMemberEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        comMemberEdit.setText("Edit");
+        comMemberEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comMemberEditActionPerformed(evt);
+            }
+        });
 
-        jButton67.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
-        jButton67.setText("View");
+        comMemberView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        comMemberView.setText("View");
+        comMemberView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comMemberViewActionPerformed(evt);
+            }
+        });
 
-        jButton68.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
-        jButton68.setText("Add");
+        comMemberAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        comMemberAdd.setText("Add");
+        comMemberAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comMemberAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel24Layout = new javax.swing.GroupLayout(jPanel24);
         jPanel24.setLayout(jPanel24Layout);
         jPanel24Layout.setHorizontalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel24Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton68)
+                .addGap(0, 781, Short.MAX_VALUE)
+                .addComponent(comMemberAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton67)
+                .addComponent(comMemberView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton66)
+                .addComponent(comMemberEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton65))
+                .addComponent(comMemberDelete))
         );
         jPanel24Layout.setVerticalGroup(
             jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel24Layout.createSequentialGroup()
                 .addGroup(jPanel24Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton65)
-                    .addComponent(jButton66)
-                    .addComponent(jButton67)
-                    .addComponent(jButton68))
+                    .addComponent(comMemberDelete)
+                    .addComponent(comMemberEdit)
+                    .addComponent(comMemberView)
+                    .addComponent(comMemberAdd))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
+
+        jTable11.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane11.setViewportView(jTable11);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane11))
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("Committee Members", jPanel6);
 
         javax.swing.GroupLayout ClientsManagementLayout = new javax.swing.GroupLayout(ClientsManagement);
         ClientsManagement.setLayout(ClientsManagementLayout);
@@ -2368,22 +2564,15 @@ public class Home extends javax.swing.JFrame {
             .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(ClientsManagementLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(ClientsManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane11, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jTabbedPane3)
                 .addContainerGap())
         );
         ClientsManagementLayout.setVerticalGroup(
             ClientsManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, ClientsManagementLayout.createSequentialGroup()
                 .addComponent(jLabel23)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTabbedPane3)
                 .addContainerGap())
         );
 
@@ -3092,6 +3281,48 @@ public class Home extends javax.swing.JFrame {
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_suppOutsItemEditActionPerformed
 
+    private void clientDetailsAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsAddActionPerformed
+        AddClient frm = new AddClient();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_clientDetailsAddActionPerformed
+
+    private void clientDetailsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsViewActionPerformed
+        ViewClient frm = new ViewClient();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_clientDetailsViewActionPerformed
+
+    private void clientDetailsEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsEditActionPerformed
+        EditClient frm = new EditClient();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_clientDetailsEditActionPerformed
+
+    private void comMemberAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comMemberAddActionPerformed
+        AddCommitteeMember frm = new AddCommitteeMember();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_comMemberAddActionPerformed
+
+    private void comMemberViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comMemberViewActionPerformed
+        ViewCommitteeMember frm = new ViewCommitteeMember();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_comMemberViewActionPerformed
+
+    private void comMemberEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comMemberEditActionPerformed
+        EditCommitteeMember frm = new EditCommitteeMember();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_comMemberEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3166,6 +3397,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton btnhomeSearch13;
     private javax.swing.JButton btnhomeSearch14;
     private javax.swing.JButton btnhomeSearch15;
+    private javax.swing.JButton btnhomeSearch16;
     private javax.swing.JButton btnhomeSearch3;
     private javax.swing.JButton btnhomeSearch4;
     private javax.swing.JButton btnhomeSearch5;
@@ -3177,10 +3409,18 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton budgetDelete;
     private javax.swing.JButton budgetEdit;
     private javax.swing.JButton budgetView;
+    private javax.swing.JButton clientDetailsAdd;
+    private javax.swing.JButton clientDetailsDetails;
+    private javax.swing.JButton clientDetailsEdit;
+    private javax.swing.JButton clientDetailsView;
     private javax.swing.JButton clientpaymentsAdd;
     private javax.swing.JButton clientpaymentsDelete;
     private javax.swing.JButton clientpaymentsEdit;
     private javax.swing.JButton clientpaymentsView;
+    private javax.swing.JButton comMemberAdd;
+    private javax.swing.JButton comMemberDelete;
+    private javax.swing.JButton comMemberEdit;
+    private javax.swing.JButton comMemberView;
     private javax.swing.JButton equipmentPlanAdd;
     private javax.swing.JButton equipmentPlanDelete;
     private javax.swing.JButton equipmentPlanEdit;
@@ -3208,6 +3448,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTextField homeSearch13;
     private javax.swing.JTextField homeSearch14;
     private javax.swing.JTextField homeSearch15;
+    private javax.swing.JTextField homeSearch16;
     private javax.swing.JTextField homeSearch3;
     private javax.swing.JTextField homeSearch4;
     private javax.swing.JTextField homeSearch5;
@@ -3223,6 +3464,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JComboBox homeSearchTypes13;
     private javax.swing.JComboBox homeSearchTypes14;
     private javax.swing.JComboBox homeSearchTypes15;
+    private javax.swing.JComboBox homeSearchTypes16;
     private javax.swing.JComboBox homeSearchTypes3;
     private javax.swing.JComboBox homeSearchTypes4;
     private javax.swing.JComboBox homeSearchTypes5;
@@ -3259,10 +3501,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton62;
     private javax.swing.JButton jButton63;
     private javax.swing.JButton jButton64;
-    private javax.swing.JButton jButton65;
-    private javax.swing.JButton jButton66;
-    private javax.swing.JButton jButton67;
-    private javax.swing.JButton jButton68;
     private javax.swing.JButton jButton69;
     private javax.swing.JButton jButton70;
     private javax.swing.JButton jButton71;
@@ -3278,6 +3516,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton81;
     private javax.swing.JButton jButton82;
     private javax.swing.JButton jButton83;
+    private javax.swing.JButton jButton88;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox12;
@@ -3304,6 +3543,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox32;
     private javax.swing.JComboBox jComboBox33;
     private javax.swing.JComboBox jComboBox34;
+    private javax.swing.JComboBox jComboBox35;
+    private javax.swing.JComboBox jComboBox36;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox7;
@@ -3370,7 +3611,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel36;
     private javax.swing.JPanel jPanel37;
     private javax.swing.JPanel jPanel38;
+    private javax.swing.JPanel jPanel39;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel40;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
@@ -3384,6 +3629,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane16;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
@@ -3391,6 +3637,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
@@ -3401,6 +3648,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable jTable16;
     private javax.swing.JTable jTable2;
     private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
