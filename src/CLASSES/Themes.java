@@ -9,6 +9,7 @@ package CLASSES;
 import de.javasoft.plaf.synthetica.SyntheticaAluOxideLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlueMoonLookAndFeel;
 import de.javasoft.plaf.synthetica.SyntheticaBlueSteelLookAndFeel;
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -45,6 +46,10 @@ public class Themes {
     public boolean setIcon(JFrame j) {
         j.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/IMAGES/favicon.png")));
         return true;
+    }
+
+    public void setSize(JFrame j){
+        j.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
 }
