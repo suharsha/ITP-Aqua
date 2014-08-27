@@ -47,7 +47,7 @@ public class AddForwardedFiles extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Add Forwarding Files");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

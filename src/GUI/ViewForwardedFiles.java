@@ -48,7 +48,7 @@ public class ViewForwardedFiles extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Forwarded Files");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

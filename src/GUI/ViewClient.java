@@ -45,7 +45,7 @@ public class ViewClient extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Client");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

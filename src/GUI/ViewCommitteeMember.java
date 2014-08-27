@@ -46,7 +46,7 @@ public class ViewCommitteeMember extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Committee Member");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

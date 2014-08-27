@@ -44,7 +44,7 @@ public class ViewClientPayment extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("View Client Payment");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

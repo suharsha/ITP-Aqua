@@ -45,7 +45,7 @@ public class EditClient extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Edit Client");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

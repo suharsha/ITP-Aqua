@@ -50,7 +50,7 @@ public class EditSupplier extends javax.swing.JFrame {
         jTextField5 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Edit Supplier");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

@@ -46,7 +46,7 @@ public class AddClientPayment extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Add New Event");
+        setTitle("Add Client Payment");
 
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 

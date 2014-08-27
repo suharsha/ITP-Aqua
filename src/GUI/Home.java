@@ -236,9 +236,9 @@ public class Home extends javax.swing.JFrame {
         jPanel20 = new javax.swing.JPanel();
         jPanel21 = new javax.swing.JPanel();
         jButton59 = new javax.swing.JButton();
-        jButton60 = new javax.swing.JButton();
-        jButton61 = new javax.swing.JButton();
-        jButton62 = new javax.swing.JButton();
+        suppPaymentsEdit = new javax.swing.JButton();
+        suppPaymentsView = new javax.swing.JButton();
+        suppPaymentsAdd = new javax.swing.JButton();
         jPanel22 = new javax.swing.JPanel();
         homeSearch9 = new javax.swing.JTextField();
         homeSearchTypes9 = new javax.swing.JComboBox();
@@ -310,9 +310,9 @@ public class Home extends javax.swing.JFrame {
         jLabel25 = new javax.swing.JLabel();
         jPanel28 = new javax.swing.JPanel();
         jButton75 = new javax.swing.JButton();
-        jButton76 = new javax.swing.JButton();
-        jButton77 = new javax.swing.JButton();
-        jButton78 = new javax.swing.JButton();
+        employeeEdit = new javax.swing.JButton();
+        employeeView = new javax.swing.JButton();
+        employeeAdd = new javax.swing.JButton();
         UserManagement = new javax.swing.JPanel();
         jScrollPane14 = new javax.swing.JScrollPane();
         jTable14 = new javax.swing.JTable();
@@ -326,9 +326,9 @@ public class Home extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
         jButton80 = new javax.swing.JButton();
-        jButton81 = new javax.swing.JButton();
+        userEdit = new javax.swing.JButton();
         jButton82 = new javax.swing.JButton();
-        jButton83 = new javax.swing.JButton();
+        userManAdd = new javax.swing.JButton();
         StatusBar = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -664,7 +664,7 @@ public class Home extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton1)
                             .addComponent(jButton14))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
                         .addComponent(homeCompletionSlider, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -739,9 +739,8 @@ public class Home extends javax.swing.JFrame {
                 .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 1155, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         HomeLayout.setVerticalGroup(
@@ -2135,14 +2134,29 @@ public class Home extends javax.swing.JFrame {
         jButton59.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
         jButton59.setText("Delete");
 
-        jButton60.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
-        jButton60.setText("Edit");
+        suppPaymentsEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        suppPaymentsEdit.setText("Edit");
+        suppPaymentsEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppPaymentsEditActionPerformed(evt);
+            }
+        });
 
-        jButton61.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
-        jButton61.setText("View");
+        suppPaymentsView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        suppPaymentsView.setText("View");
+        suppPaymentsView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppPaymentsViewActionPerformed(evt);
+            }
+        });
 
-        jButton62.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
-        jButton62.setText("Add");
+        suppPaymentsAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        suppPaymentsAdd.setText("Add");
+        suppPaymentsAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                suppPaymentsAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
@@ -2150,11 +2164,11 @@ public class Home extends javax.swing.JFrame {
             jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton62)
+                .addComponent(suppPaymentsAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton61)
+                .addComponent(suppPaymentsView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton60)
+                .addComponent(suppPaymentsEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton59))
         );
@@ -2163,9 +2177,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton59)
-                    .addComponent(jButton60)
-                    .addComponent(jButton61)
-                    .addComponent(jButton62))
+                    .addComponent(suppPaymentsEdit)
+                    .addComponent(suppPaymentsView)
+                    .addComponent(suppPaymentsAdd))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -2795,14 +2809,29 @@ public class Home extends javax.swing.JFrame {
         jButton75.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
         jButton75.setText("Delete");
 
-        jButton76.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
-        jButton76.setText("Edit");
+        employeeEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        employeeEdit.setText("Edit");
+        employeeEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeEditActionPerformed(evt);
+            }
+        });
 
-        jButton77.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
-        jButton77.setText("View");
+        employeeView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        employeeView.setText("View");
+        employeeView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeViewActionPerformed(evt);
+            }
+        });
 
-        jButton78.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
-        jButton78.setText("Add");
+        employeeAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        employeeAdd.setText("Add");
+        employeeAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                employeeAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel28Layout = new javax.swing.GroupLayout(jPanel28);
         jPanel28.setLayout(jPanel28Layout);
@@ -2810,11 +2839,11 @@ public class Home extends javax.swing.JFrame {
             jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel28Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton78)
+                .addComponent(employeeAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton77)
+                .addComponent(employeeView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton76)
+                .addComponent(employeeEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton75))
         );
@@ -2823,9 +2852,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel28Layout.createSequentialGroup()
                 .addGroup(jPanel28Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton75)
-                    .addComponent(jButton76)
-                    .addComponent(jButton77)
-                    .addComponent(jButton78))
+                    .addComponent(employeeEdit)
+                    .addComponent(employeeView)
+                    .addComponent(employeeAdd))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -2927,14 +2956,29 @@ public class Home extends javax.swing.JFrame {
         jButton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
         jButton80.setText("Delete");
 
-        jButton81.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
-        jButton81.setText("Edit");
+        userEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        userEdit.setText("Edit");
+        userEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userEditActionPerformed(evt);
+            }
+        });
 
         jButton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
         jButton82.setText("View");
+        jButton82.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton82ActionPerformed(evt);
+            }
+        });
 
-        jButton83.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
-        jButton83.setText("Add");
+        userManAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        userManAdd.setText("Add");
+        userManAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userManAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
@@ -2942,11 +2986,11 @@ public class Home extends javax.swing.JFrame {
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton83)
+                .addComponent(userManAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton82)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton81)
+                .addComponent(userEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton80))
         );
@@ -2955,9 +2999,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel30Layout.createSequentialGroup()
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton80)
-                    .addComponent(jButton81)
+                    .addComponent(userEdit)
                     .addComponent(jButton82)
-                    .addComponent(jButton83))
+                    .addComponent(userManAdd))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -3359,6 +3403,69 @@ public class Home extends javax.swing.JFrame {
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_supplierEditActionPerformed
 
+    private void employeeAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeAddActionPerformed
+        AddEmployee frm = new AddEmployee();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_employeeAddActionPerformed
+
+    private void employeeEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeEditActionPerformed
+        EditEmployee frm = new EditEmployee();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_employeeEditActionPerformed
+
+    private void employeeViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_employeeViewActionPerformed
+        ViewEmployee frm = new ViewEmployee();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_employeeViewActionPerformed
+
+    private void userManAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManAddActionPerformed
+        AddUser frm = new AddUser();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_userManAddActionPerformed
+
+    private void userEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userEditActionPerformed
+        EditUser frm = new EditUser();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_userEditActionPerformed
+
+    private void jButton82ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton82ActionPerformed
+        ViewUser frm = new ViewUser();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_jButton82ActionPerformed
+
+    private void suppPaymentsAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppPaymentsAddActionPerformed
+        AddSupplierPayment frm = new AddSupplierPayment();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_suppPaymentsAddActionPerformed
+
+    private void suppPaymentsEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppPaymentsEditActionPerformed
+        EditSupplierPayment frm = new EditSupplierPayment();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_suppPaymentsEditActionPerformed
+
+    private void suppPaymentsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppPaymentsViewActionPerformed
+        ViewSupplierPayment frm = new ViewSupplierPayment();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_suppPaymentsViewActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3457,6 +3564,9 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton comMemberDelete;
     private javax.swing.JButton comMemberEdit;
     private javax.swing.JButton comMemberView;
+    private javax.swing.JButton employeeAdd;
+    private javax.swing.JButton employeeEdit;
+    private javax.swing.JButton employeeView;
     private javax.swing.JButton equipmentPlanAdd;
     private javax.swing.JButton equipmentPlanDelete;
     private javax.swing.JButton equipmentPlanEdit;
@@ -3532,23 +3642,15 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton54;
     private javax.swing.JButton jButton55;
     private javax.swing.JButton jButton59;
-    private javax.swing.JButton jButton60;
-    private javax.swing.JButton jButton61;
-    private javax.swing.JButton jButton62;
     private javax.swing.JButton jButton63;
     private javax.swing.JButton jButton64;
     private javax.swing.JButton jButton69;
     private javax.swing.JButton jButton70;
     private javax.swing.JButton jButton74;
     private javax.swing.JButton jButton75;
-    private javax.swing.JButton jButton76;
-    private javax.swing.JButton jButton77;
-    private javax.swing.JButton jButton78;
     private javax.swing.JButton jButton79;
     private javax.swing.JButton jButton80;
-    private javax.swing.JButton jButton81;
     private javax.swing.JButton jButton82;
-    private javax.swing.JButton jButton83;
     private javax.swing.JButton jButton88;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox10;
@@ -3690,8 +3792,13 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton suppOutsItemAdd;
     private javax.swing.JButton suppOutsItemEdit;
     private javax.swing.JButton suppOutsItemView;
+    private javax.swing.JButton suppPaymentsAdd;
+    private javax.swing.JButton suppPaymentsEdit;
+    private javax.swing.JButton suppPaymentsView;
     private javax.swing.JButton supplierAdd;
     private javax.swing.JButton supplierEdit;
     private javax.swing.JButton supplierView;
+    private javax.swing.JButton userEdit;
+    private javax.swing.JButton userManAdd;
     // End of variables declaration//GEN-END:variables
 }
