@@ -294,9 +294,9 @@ public class Home extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
         jButton70 = new javax.swing.JButton();
-        jButton71 = new javax.swing.JButton();
-        jButton72 = new javax.swing.JButton();
-        jButton73 = new javax.swing.JButton();
+        supplierEdit = new javax.swing.JButton();
+        supplierView = new javax.swing.JButton();
+        supplierAdd = new javax.swing.JButton();
         EmployeeManagement = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
         jTable13 = new javax.swing.JTable();
@@ -2648,14 +2648,29 @@ public class Home extends javax.swing.JFrame {
         jButton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
         jButton70.setText("Delete");
 
-        jButton71.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
-        jButton71.setText("Edit");
+        supplierEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
+        supplierEdit.setText("Edit");
+        supplierEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierEditActionPerformed(evt);
+            }
+        });
 
-        jButton72.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
-        jButton72.setText("View");
+        supplierView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        supplierView.setText("View");
+        supplierView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierViewActionPerformed(evt);
+            }
+        });
 
-        jButton73.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
-        jButton73.setText("Add");
+        supplierAdd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/add.png"))); // NOI18N
+        supplierAdd.setText("Add");
+        supplierAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierAddActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
@@ -2663,11 +2678,11 @@ public class Home extends javax.swing.JFrame {
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton73)
+                .addComponent(supplierAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton72)
+                .addComponent(supplierView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton71)
+                .addComponent(supplierEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton70))
         );
@@ -2676,9 +2691,9 @@ public class Home extends javax.swing.JFrame {
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton70)
-                    .addComponent(jButton71)
-                    .addComponent(jButton72)
-                    .addComponent(jButton73))
+                    .addComponent(supplierEdit)
+                    .addComponent(supplierView)
+                    .addComponent(supplierAdd))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -3323,6 +3338,27 @@ public class Home extends javax.swing.JFrame {
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_comMemberEditActionPerformed
 
+    private void supplierAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierAddActionPerformed
+        AddSupplier frm = new AddSupplier();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_supplierAddActionPerformed
+
+    private void supplierViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierViewActionPerformed
+        ViewSupplier frm = new ViewSupplier();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_supplierViewActionPerformed
+
+    private void supplierEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierEditActionPerformed
+        EditSupplier frm = new EditSupplier();
+        frm.setLocationRelativeTo ( null );
+        frm.setVisible(true);
+        frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_supplierEditActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3503,9 +3539,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton jButton64;
     private javax.swing.JButton jButton69;
     private javax.swing.JButton jButton70;
-    private javax.swing.JButton jButton71;
-    private javax.swing.JButton jButton72;
-    private javax.swing.JButton jButton73;
     private javax.swing.JButton jButton74;
     private javax.swing.JButton jButton75;
     private javax.swing.JButton jButton76;
@@ -3657,5 +3690,8 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton suppOutsItemAdd;
     private javax.swing.JButton suppOutsItemEdit;
     private javax.swing.JButton suppOutsItemView;
+    private javax.swing.JButton supplierAdd;
+    private javax.swing.JButton supplierEdit;
+    private javax.swing.JButton supplierView;
     // End of variables declaration//GEN-END:variables
 }
