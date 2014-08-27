@@ -3460,8 +3460,8 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_suppPaymentsEditActionPerformed
 
     private void suppPaymentsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppPaymentsViewActionPerformed
-        iewSupplierPayment frm = new ViewSupplierPayment();
-        frm.setLocationRelativeTo ( null );
+        ViewSupplierPayment frm = new ViewSupplierPayment();
+        rm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_suppPaymentsViewActionPerformed
