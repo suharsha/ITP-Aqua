@@ -3179,7 +3179,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_eventDetailsEditActionPerformed
 
     private void equipmentPlanAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentPlanAddActionPerformed
-        AddEquipmentPlan frm = new AddEquipmentPlan();
+        EPChooseEvent frm = new EPChooseEvent();
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
