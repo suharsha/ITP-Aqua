@@ -84,7 +84,7 @@ public class Home extends javax.swing.JFrame {
         jLabel9 = new javax.swing.JLabel();
         EventDetails = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        eventDetailsMainTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         homeSearch1 = new javax.swing.JTextField();
         homeSearchTypes1 = new javax.swing.JComboBox();
@@ -758,7 +758,7 @@ public class Home extends javax.swing.JFrame {
 
         CardsPanel.add(Home, "cHomePanel");
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -769,7 +769,7 @@ public class Home extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(eventDetailsMainTable);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
@@ -3575,6 +3575,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JButton eventDetailsDelete;
     private javax.swing.JButton eventDetailsDelete1;
     private javax.swing.JButton eventDetailsEdit;
+    private javax.swing.JTable eventDetailsMainTable;
     private javax.swing.JButton eventDetailsView;
     private javax.swing.JButton eventFilesAdd;
     private javax.swing.JButton eventFilesDelete;
@@ -3782,7 +3783,6 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable jTable15;
     private javax.swing.JTable jTable16;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
