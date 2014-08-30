@@ -6,15 +6,20 @@
 
 package GUI;
 
+import CLASSES.EventDetailsDAO;
 import CLASSES.Themes;
 import java.awt.CardLayout;
+import java.util.Vector;
 
 /**
  *
  * @author Suharsha Wick
  */
 public class Home extends javax.swing.JFrame {
+private Vector<Vector<String>> data_eventDetails; //Used for data from database
+private Vector<String> header_eventDetails; //Used to store data header
 
+private Vector<Vector<String>> data;
     /**
      * Creates new form Home
      */
@@ -24,6 +29,19 @@ public class Home extends javax.swing.JFrame {
         theme.setIcon(this);
         theme.setSize(this);
         initComponents();
+        
+        header_eventDetails = new Vector<String>();
+        header_eventDetails.add("EventID");
+        header_eventDetails.add("Name");
+        header_eventDetails.add("Client");
+        header_eventDetails.add("Location");
+        header_eventDetails.add("Start Date");
+        header_eventDetails.add("StartTime");
+        header_eventDetails.add("End Date");
+        header_eventDetails.add("EndTime");
+        header_eventDetails.add("Status");
+        
+        loadEventDetailsTable();
     }
 
     /**
@@ -98,6 +116,7 @@ public class Home extends javax.swing.JFrame {
         eventDetailsEdit = new javax.swing.JButton();
         eventDetailsView = new javax.swing.JButton();
         eventDetailsAdd = new javax.swing.JButton();
+        EDRefresh = new javax.swing.JButton();
         Invoice = new javax.swing.JPanel();
         jScrollPane16 = new javax.swing.JScrollPane();
         jTable16 = new javax.swing.JTable();
@@ -330,6 +349,7 @@ public class Home extends javax.swing.JFrame {
         jButton82 = new javax.swing.JButton();
         userManAdd = new javax.swing.JButton();
         StatusBar = new javax.swing.JPanel();
+        lblStatus = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -852,12 +872,21 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        EDRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Button-Refresh-icon.png"))); // NOI18N
+        EDRefresh.setText("Refresh");
+        EDRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EDRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(EDRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(eventDetailsAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(eventDetailsView)
@@ -873,7 +902,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(eventDetailsDelete)
                     .addComponent(eventDetailsEdit)
                     .addComponent(eventDetailsView)
-                    .addComponent(eventDetailsAdd))
+                    .addComponent(eventDetailsAdd)
+                    .addComponent(EDRefresh))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -3039,11 +3069,13 @@ public class Home extends javax.swing.JFrame {
         StatusBar.setLayout(StatusBarLayout);
         StatusBarLayout.setHorizontalGroup(
             StatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1329, Short.MAX_VALUE)
+            .addGroup(StatusBarLayout.createSequentialGroup()
+                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         StatusBarLayout.setVerticalGroup(
             StatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 19, Short.MAX_VALUE)
+            .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout BasePanelLayout = new javax.swing.GroupLayout(BasePanel);
@@ -3053,10 +3085,8 @@ public class Home extends javax.swing.JFrame {
             .addGroup(BasePanelLayout.createSequentialGroup()
                 .addComponent(NavigationPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-            .addGroup(BasePanelLayout.createSequentialGroup()
-                .addComponent(StatusBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(CardsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 1152, Short.MAX_VALUE))
+            .addComponent(StatusBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BasePanelLayout.setVerticalGroup(
             BasePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3086,7 +3116,9 @@ public class Home extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(BasePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(BasePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(3, 3, 3))
         );
 
         pack();
@@ -3466,6 +3498,11 @@ public class Home extends javax.swing.JFrame {
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_suppPaymentsViewActionPerformed
 
+    private void EDRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EDRefreshActionPerformed
+        loadEventDetailsTable();
+        lblStatus.setText("Event details table has been refreshed");
+    }//GEN-LAST:event_EDRefreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3500,6 +3537,16 @@ public class Home extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void loadEventDetailsTable() {
+
+        EventDetailsDAO dao = new EventDetailsDAO();
+        data_eventDetails = dao.getEventDetails();
+
+        eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_eventDetails, header_eventDetails));
+        jScrollPane3.setViewportView(eventDetailsMainTable);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ActivityPlan;
@@ -3507,6 +3554,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JPanel CardsPanel;
     private javax.swing.JPanel ClientPayments;
     private javax.swing.JPanel ClientsManagement;
+    private javax.swing.JButton EDRefresh;
     private javax.swing.JPanel EmployeeManagement;
     private javax.swing.JPanel EquipmentPlan;
     private javax.swing.JPanel EventBudget;
@@ -3789,6 +3837,7 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
+    private javax.swing.JLabel lblStatus;
     private javax.swing.JButton suppOutsItemAdd;
     private javax.swing.JButton suppOutsItemEdit;
     private javax.swing.JButton suppOutsItemView;

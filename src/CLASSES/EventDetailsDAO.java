@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 
 /**
  *
@@ -110,6 +111,44 @@ public class EventDetailsDAO {
         }   
        return 0;
     }
+    public Vector getEventDetails() {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  eventID, name, client, location,Description, StartDate, CONCAT_WS(' ',CONCAT_WS(':',StartTimeHours,StartTimeMinutes),StartTimeAm),"
+                    + " EndDate,CONCAT_WS(' ',CONCAT_WS(':',EndTimeHours,EndTimeMinutes),EndTimeAm),status "+
+                    "FROM Event_Details";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
     
+
 
 }

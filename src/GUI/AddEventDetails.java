@@ -11,7 +11,7 @@ import CLASSES.EventDetailsDAO;
 import CLASSES.Themes;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
-
+import GUI.Home;
 /**
  *
  * @author Suharsha Wick
@@ -346,6 +346,8 @@ public class AddEventDetails extends javax.swing.JFrame {
         else
             JOptionPane.showMessageDialog(this,"Add event operation failed!","Unuccessful",JOptionPane.ERROR_MESSAGE);   
         eventdetAddMem.setEnabled(true);
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void eventdetAddMemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventdetAddMemActionPerformed
