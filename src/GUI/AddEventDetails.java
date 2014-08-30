@@ -12,6 +12,8 @@ import CLASSES.Themes;
 import java.text.SimpleDateFormat;
 import javax.swing.JOptionPane;
 import GUI.Home;
+import java.util.ArrayList;
+import java.util.Iterator;
 /**
  *
  * @author Suharsha Wick
@@ -25,6 +27,7 @@ public class AddEventDetails extends javax.swing.JFrame {
         Themes theme = new Themes();
         theme.setIcon(this);
         initComponents();
+        FillEmployeeNamesList();
     }
 
     /**
@@ -390,6 +393,18 @@ public class AddEventDetails extends javax.swing.JFrame {
                 new AddEventDetails().setVisible(true);
             }
         });
+    }
+    
+    private void FillEmployeeNamesList() {
+        EventDetailsDAO dao = new EventDetailsDAO();
+        ArrayList clientNamesList = dao.getClientNamesList();
+
+        Iterator i = clientNamesList.iterator();
+        cmbClient.removeAllItems();
+        while (i.hasNext()) {
+            cmbClient.addItem(i.next());
+        }
+        //activityPlanEmpNames.setSelectedIndex(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

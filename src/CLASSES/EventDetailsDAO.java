@@ -6,12 +6,16 @@
 
 package CLASSES;
 
+import GUI.Home;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,7 +70,7 @@ public class EventDetailsDAO {
 
             Statement stmt = dbConn.createStatement();
 
-            String query = "SELECT DISTINCT customer_ID FROM client WHERE eventID ="+cName+"";
+            String query = "SELECT DISTINCT customer_ID FROM client WHERE cus_name ='"+cName+"'";
 
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
@@ -148,7 +152,178 @@ public class EventDetailsDAO {
         }
         return eventDetailsVector;
     }
+   
+public EventDetails getEventDetails(int eventId) {
+
+    EventDetails eventDetails = null;
+    Connection dbConn = null;
+
+        try {
+
+            //Connect to th DB
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  eventID,name,client,location, description, StartDate, StartTimeHours, StartTimeMinutes, StartTimeAm, EndDate, EndTimeHours, EndTimeMinutes, EndTimeAm, " +
+                    "status FROM Event_Details " +
+                    "WHERE eventID = "+eventId+"";
+
+            System.out.println(query);
+
+           ResultSet rs = stmt.executeQuery(query);
+           eventDetails = new EventDetails();
+
+            if (rs.next()) {
+                eventDetails.setEventID(Integer.parseInt(rs.getString(1))); //eventID
+               // jobDetails.setJobName(rs.getString(2)); //jobName
+               // jobDetails.setPostedDate(rs.getString(3)); //postedDate
+               // jobDetails.setExpirationDate(rs.getString(4)); //expirationDate
+               // jobDetails.setJobCategoryName(rs.getString(5)); //jobCatName
+                //jobDetails.setSubCategoryName(rs.getString(6)); //subCategoryName
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed for JobID");
+        } finally {
+            //Close the db connection
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetails;
+
+       }
+public String[] getSelectedEventDetailsStrings(int selectedEventID){
+
+            //arraylist is having behaviours of arrys
+        ArrayList<String> eventAttributesList = null;
+	Connection dbConn = null;
+        String[] AttList = null;
+        int eventID = selectedEventID;
+        try{
+            //connect with db, create the statement and using that execute the query
+            //Connect to th DB
+            dbConn = dbConnManager.connect();
+
+            Statement stmt = dbConn.createStatement();
+
+            //Select the JobCatNames
+            String query = "SELECT * FROM Event_Details WHERE eventID = "+eventID+"";
+
+            System.out.println(query);
+            //by this query we are getting more than one value
+            ResultSet rs = stmt.executeQuery(query);
+
+            //one by one from resultset,we have to add values to your arraylist.this is done by while loop
+            eventAttributesList = new ArrayList<>();
+
+            System.out.println("Arraylist has been created");
+            while (rs.next()) {
+
+                    for (int i=0; i<=13;i++)
+                    {
+                        eventAttributesList.add(rs.getString(i+1));
+                    }
+            }
+            System.out.println("Data have been added");
+            AttList = eventAttributesList.toArray(new String[14]);
+            System.out.println("ArrayList converted to an array");
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed at JobCatNames");
+        }finally{
+            //how ever you are going to execute that part.that's why conclose happening inside filnally block.
+            //Close the db connection
+            dbConnManager.con_close(dbConn);
+        }
+        return AttList;
+    }
+    public void updateEvent(EventDetails d,int SelectedID) {
+
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+
+            Statement stmt = dbConn.createStatement();
+
+            String query = "UPDATE Event_Details SET " +
+                    "name='" + d.getName() + "',client='" + d.getClientID() + "',location='" + d.getLocation() + "',description='"+ d.getDescription() +"',StartDate='"+ d.getStartDate() +"',StartTimeHours='"+ d.getStartTimeHours() +"',StartTimeMinutes='"+ d.getStartTimeMinutes() +"'"
+                    + ",StartTimeAm='"+ d.getStartTimeAM() +"',EndDate='"+ d.getEndDate() +"',EndTimeHours='"+ d.getEndTimeHours() +"',EndTimeMinutes='"+ d.getEndTimeMinutes() +"',EndTimeAm='"+ d.getEndTimeAM() +"',status='"+ d.getStatus() +"'"
+                    + "WHERE eventID = "+SelectedID+"";
+
+            pst=dbConn.prepareStatement(query);
+            pst.execute();
+
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Insert query failed");
+
+        }finally{
+            dbConnManager.con_close(dbConn);
+        }
+    }
     
+    public void deleteEvent(int SelectedID) {
 
+        boolean result = false;
+	Connection dbConn = null;
 
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+            int P = JOptionPane.showConfirmDialog(null," Are you sure want to delete ?","Confirmation",JOptionPane.YES_NO_OPTION);
+            if (P==0)
+            {
+                String query= "DELETE FROM Event_Details where eventID = '" + SelectedID + "'";
+                pst= dbConn.prepareStatement(query);
+                pst.execute();
+                JOptionPane.showMessageDialog(null,"Successfully deleted","Record Deleted",JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Delete query failed");
+
+        }finally{
+            dbConnManager.con_close(dbConn);
+        }
+    }
+    public ArrayList getClientNamesList(){
+
+            //arraylist is having behaviours of arrys
+        ArrayList ClientNamesList = null;
+	Connection dbConn = null;
+
+        try{
+            //connect with db, create the statement and using that execute the query
+            //Connect to th DB
+            dbConn = dbConnManager.connect();
+
+            Statement stmt = dbConn.createStatement();
+
+            //Select the JobCatNames
+            String query = "SELECT DISTINCT cus_name FROM client";
+
+            System.out.println(query);
+            //by this query we are getting more than one value
+            ResultSet rs = stmt.executeQuery(query);
+
+            //one by one from resultset,we have to add values to your arraylist.this is done by while loop
+            ClientNamesList = new ArrayList();
+
+            //
+            while (rs.next()) {
+                String eveName = rs.getString(1);
+                System.out.println(eveName);
+                ClientNamesList.add(eveName);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed at JobCatNames");
+        }finally{
+            //how ever you are going to execute that part.that's why conclose happening inside filnally block.
+            //Close the db connection
+            dbConnManager.con_close(dbConn);
+        }
+        return ClientNamesList;
+    }
+    
 }

@@ -20,6 +20,8 @@ private Vector<Vector<String>> data_eventDetails; //Used for data from database
 private Vector<String> header_eventDetails; //Used to store data header
 
 private Vector<Vector<String>> data;
+
+private int selectedEventDetailsId;
     /**
      * Creates new form Home
      */
@@ -789,6 +791,11 @@ private Vector<Vector<String>> data;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        eventDetailsMainTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                eventDetailsMainTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(eventDetailsMainTable);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
@@ -847,6 +854,11 @@ private Vector<Vector<String>> data;
 
         eventDetailsDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
         eventDetailsDelete.setText("Delete");
+        eventDetailsDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eventDetailsDeleteActionPerformed(evt);
+            }
+        });
 
         eventDetailsEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
         eventDetailsEdit.setText("Edit");
@@ -858,6 +870,7 @@ private Vector<Vector<String>> data;
 
         eventDetailsView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
         eventDetailsView.setText("View");
+        eventDetailsView.setEnabled(false);
         eventDetailsView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eventDetailsViewActionPerformed(evt);
@@ -3198,6 +3211,7 @@ private Vector<Vector<String>> data;
 
     private void eventDetailsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDetailsViewActionPerformed
         ViewEventDetails frm = new ViewEventDetails();
+        frm.showEventDetails(selectedEventDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3205,6 +3219,7 @@ private Vector<Vector<String>> data;
 
     private void eventDetailsEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDetailsEditActionPerformed
         EditEventDetails frm = new EditEventDetails();
+        frm.showEventDetails(selectedEventDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3503,6 +3518,18 @@ private Vector<Vector<String>> data;
         lblStatus.setText("Event details table has been refreshed");
     }//GEN-LAST:event_EDRefreshActionPerformed
 
+    private void eventDetailsMainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eventDetailsMainTableMouseClicked
+        selectRowEventDetails();
+        eventDetailsView.setEnabled(true);
+    }//GEN-LAST:event_eventDetailsMainTableMouseClicked
+
+    private void eventDetailsDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eventDetailsDeleteActionPerformed
+        selectRowEventDetails();
+        EventDetailsDAO dao = new EventDetailsDAO();
+        dao.deleteEvent(selectedEventDetailsId);
+        loadEventDetailsTable();
+    }//GEN-LAST:event_eventDetailsDeleteActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3546,6 +3573,19 @@ private Vector<Vector<String>> data;
         eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
                 data_eventDetails, header_eventDetails));
         jScrollPane3.setViewportView(eventDetailsMainTable);
+    }
+    
+    private void selectRowEventDetails() {
+
+        //retrieving the selected row index
+        int row = eventDetailsMainTable.getSelectedRow();
+
+        //if a single row is selected from the table, take each cell values into the controls
+        if (eventDetailsMainTable.getRowSelectionAllowed()) {
+
+            selectedEventDetailsId = Integer.parseInt(eventDetailsMainTable.getValueAt(row, 0).toString());
+
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

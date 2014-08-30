@@ -45,6 +45,27 @@ public class EventDetails {
         this.status = status;
     }
 
+    public EventDetails(int eventID, String name, int clientID, String location, String description, String startDate, int startTimeHours, int startTimeMinutes, String startTimeAM, String endDate, int endTimeHours, int endTimeMinutes, String endTimeAM, String status) {
+        this.eventID = eventID;
+        this.name = name;
+        this.clientID = clientID;
+        this.location = location;
+        this.description = description;
+        this.startDate = startDate;
+        this.startTimeHours = startTimeHours;
+        this.startTimeMinutes = startTimeMinutes;
+        this.startTimeAM = startTimeAM;
+        this.endDate = endDate;
+        this.endTimeHours = endTimeHours;
+        this.endTimeMinutes = endTimeMinutes;
+        this.endTimeAM = endTimeAM;
+        this.status = status;
+    }
+
+    public EventDetails(){
+        
+    }
+    
     public String getStatus() {
         return status;
     }
