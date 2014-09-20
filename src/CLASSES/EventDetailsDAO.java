@@ -22,13 +22,14 @@ import javax.swing.JOptionPane;
  * @author Suharsha Wick
  */
 public class EventDetailsDAO {
-            //connect with db,execute the query,disconnect - DAO class
-        private suhaDBConnManager dbConnManager = null;
+    
+        //connect with db,execute the query,disconnect - DAO class
+        private DBConnManager dbConnManager = null;
         PreparedStatement pst = null;
         Connection dbConn = null;
         
     public EventDetailsDAO() {
-        dbConnManager = new suhaDBConnManager();
+        dbConnManager = new DBConnManager();
         }
     
     public boolean addEventDetails(EventDetails d) {
@@ -124,9 +125,9 @@ public class EventDetailsDAO {
             dbConn = dbConnManager.connect();
             Statement stmt = dbConn.createStatement();
 
-            String query = "SELECT  eventID, name, client, location,Description, StartDate, CONCAT_WS(' ',CONCAT_WS(':',StartTimeHours,StartTimeMinutes),StartTimeAm),"
-                    + " EndDate,CONCAT_WS(' ',CONCAT_WS(':',EndTimeHours,EndTimeMinutes),EndTimeAm),status "+
-                    "FROM Event_Details";
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID";
 
             ResultSet rs = stmt.executeQuery(query);
             eventDetailsVector = new Vector<Vector<String>>();
@@ -255,7 +256,7 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
 
 
         } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Insert query failed");
+            System.out.println(sQLException + "-----------Update query failed at EventDetailsDAO.updateEvent");
 
         }finally{
             dbConnManager.con_close(dbConn);
@@ -326,4 +327,269 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
         return ClientNamesList;
     }
     
+    public Vector sortEventDetailsNameAZ() {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by e.name";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector sortEventDetailsNameZA() {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by e.name DESC ";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector sortEventDetailsClientNameAZ() {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by c.cus_name";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector sortEventDetailsClientNameZA() {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by c.cus_name DESC";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector searchEventDetailsEventName(String keyword) {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID AND e.name LIKE '"+keyword+"%'";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector searchEventDetailsClientName(String keyword) {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID AND c.cus_name LIKE '"+keyword+"%'";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
+    
+    public Vector searchEventDetailsLocation(String keyword) {
+
+        Vector<Vector<String>> eventDetailsVector = null;
+	Connection dbConn = null;
+
+        try {
+            dbConn = dbConnManager.connect();
+            Statement stmt = dbConn.createStatement();
+
+            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
+                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
+                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID AND e.location LIKE '"+keyword+"%'";
+
+            ResultSet rs = stmt.executeQuery(query);
+            eventDetailsVector = new Vector<Vector<String>>();
+
+            while (rs.next()) {
+                Vector<String> eventDetails = new Vector<String>();
+                eventDetails.add(rs.getString(1));
+                eventDetails.add(rs.getString(2));
+                eventDetails.add(rs.getString(3));
+                eventDetails.add(rs.getString(4));
+                eventDetails.add(rs.getString(6));
+                eventDetails.add(rs.getString(7));
+                eventDetails.add(rs.getString(8));
+                eventDetails.add(rs.getString(9));
+                eventDetails.add(rs.getString(10));
+                eventDetailsVector.add(eventDetails);
+            }
+
+        } catch (SQLException sQLException) {
+            System.out.println(sQLException + "-----------Select query failed");
+        } finally {
+            dbConnManager.con_close(dbConn);
+        }
+        return eventDetailsVector;
+    }
 }

@@ -23,6 +23,7 @@ public class Themes {
         
         try 
         {
+        //UIManager.setLookAndFeel("com.jtattoo.plaf.texture.TextureLookAndFeel");
             if (id==1){
                 UIManager.setLookAndFeel(new SyntheticaAluOxideLookAndFeel());
                 return true;
@@ -35,13 +36,14 @@ public class Themes {
                 UIManager.setLookAndFeel(new SyntheticaBlueSteelLookAndFeel());
                 return true;
             }
-        } 
+        }
         catch (Exception e) 
         {
             e.printStackTrace();
             return false;
         }
         return false;
+        
     }
     public boolean setIcon(JFrame j) {
         j.setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/IMAGES/favicon.png")));

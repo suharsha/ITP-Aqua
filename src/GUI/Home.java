@@ -8,7 +8,10 @@ package GUI;
 
 import CLASSES.EventDetailsDAO;
 import CLASSES.Themes;
+import CLASSES.UserManagementDAO;
 import java.awt.CardLayout;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 import java.util.Vector;
 
 /**
@@ -19,19 +22,25 @@ public class Home extends javax.swing.JFrame {
 private Vector<Vector<String>> data_eventDetails; //Used for data from database
 private Vector<String> header_eventDetails; //Used to store data header
 
+private Vector<Vector<String>> data_userManagement; //Used for data from database
+private Vector<String> header_userManagement; //Used to store data header
+
 private Vector<Vector<String>> data;
 
 private int selectedEventDetailsId;
+private int selectedUserDetailsId;
     /**
      * Creates new form Home
      */
     public Home() {
-        Themes theme = new Themes();
-        theme.setTheme(1);
-        theme.setIcon(this);
-        theme.setSize(this);
-        initComponents();
+
+        initComponents(); 
         
+        Themes theme = new Themes();
+        theme.setIcon(this);
+        Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setSize(rec.width, rec.height);
+
         header_eventDetails = new Vector<String>();
         header_eventDetails.add("EventID");
         header_eventDetails.add("Name");
@@ -43,7 +52,18 @@ private int selectedEventDetailsId;
         header_eventDetails.add("EndTime");
         header_eventDetails.add("Status");
         
+        header_userManagement = new Vector<String>();
+        header_userManagement.add("UserID");
+        header_userManagement.add("Employee Name");
+        header_userManagement.add("Level");
+        header_userManagement.add("UserName");
+        header_userManagement.add("Password");
+        header_userManagement.add("Added Date");
+        header_userManagement.add("Modified Date");
+
+        
         loadEventDetailsTable();
+        loadUserManagementTable();
     }
 
     /**
@@ -106,12 +126,9 @@ private int selectedEventDetailsId;
         jScrollPane3 = new javax.swing.JScrollPane();
         eventDetailsMainTable = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        homeSearch1 = new javax.swing.JTextField();
-        homeSearchTypes1 = new javax.swing.JComboBox();
-        btnhomeSearch1 = new javax.swing.JButton();
-        jComboBox5 = new javax.swing.JComboBox();
-        jComboBox10 = new javax.swing.JComboBox();
-        jButton25 = new javax.swing.JButton();
+        EDsearchKeyword = new javax.swing.JTextField();
+        EDSearchType = new javax.swing.JComboBox();
+        jButton2 = new javax.swing.JButton();
         jLabel15 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
         eventDetailsDelete = new javax.swing.JButton();
@@ -336,7 +353,7 @@ private int selectedEventDetailsId;
         employeeAdd = new javax.swing.JButton();
         UserManagement = new javax.swing.JPanel();
         jScrollPane14 = new javax.swing.JScrollPane();
-        jTable14 = new javax.swing.JTable();
+        userDetailsTable = new javax.swing.JTable();
         jPanel29 = new javax.swing.JPanel();
         homeSearch13 = new javax.swing.JTextField();
         homeSearchTypes13 = new javax.swing.JComboBox();
@@ -346,10 +363,11 @@ private int selectedEventDetailsId;
         jButton79 = new javax.swing.JButton();
         jLabel26 = new javax.swing.JLabel();
         jPanel30 = new javax.swing.JPanel();
-        jButton80 = new javax.swing.JButton();
+        btnUserDelete = new javax.swing.JButton();
         userEdit = new javax.swing.JButton();
-        jButton82 = new javax.swing.JButton();
+        btnViewUser = new javax.swing.JButton();
         userManAdd = new javax.swing.JButton();
+        UMRefresh = new javax.swing.JButton();
         StatusBar = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -780,6 +798,7 @@ private int selectedEventDetailsId;
 
         CardsPanel.add(Home, "cHomePanel");
 
+        eventDetailsMainTable.setAutoCreateRowSorter(true);
         eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -800,15 +819,18 @@ private int selectedEventDetailsId;
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
-        homeSearchTypes1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Location", "Client" }));
+        EDsearchKeyword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                EDsearchKeywordKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                EDsearchKeywordKeyTyped(evt);
+            }
+        });
 
-        btnhomeSearch1.setText("Search");
+        EDSearchType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Event Name", "Location", "Client Name" }));
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton25.setText("Sort");
+        jButton2.setText("Search");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -816,30 +838,21 @@ private int selectedEventDetailsId;
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(homeSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(homeSearchTypes1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
-                .addComponent(btnhomeSearch1)
-                .addGap(298, 298, 298)
-                .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EDSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(EDsearchKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton25)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addComponent(jButton2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(homeSearch1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(homeSearchTypes1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhomeSearch1)
-                    .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton25))
+                    .addComponent(EDsearchKeyword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EDSearchType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -928,7 +941,7 @@ private int selectedEventDetailsId;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EventDetailsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(EventDetailsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane3)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -2929,7 +2942,7 @@ private int selectedEventDetailsId;
 
         CardsPanel.add(EmployeeManagement, "cEmployeeManagement");
 
-        jTable14.setModel(new javax.swing.table.DefaultTableModel(
+        userDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2940,7 +2953,12 @@ private int selectedEventDetailsId;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane14.setViewportView(jTable14);
+        userDetailsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userDetailsTableMouseClicked(evt);
+            }
+        });
+        jScrollPane14.setViewportView(userDetailsTable);
 
         jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
@@ -2996,8 +3014,13 @@ private int selectedEventDetailsId;
 
         jPanel30.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton80.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
-        jButton80.setText("Delete");
+        btnUserDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
+        btnUserDelete.setText("Delete");
+        btnUserDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserDeleteActionPerformed(evt);
+            }
+        });
 
         userEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
         userEdit.setText("Edit");
@@ -3007,11 +3030,11 @@ private int selectedEventDetailsId;
             }
         });
 
-        jButton82.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
-        jButton82.setText("View");
-        jButton82.addActionListener(new java.awt.event.ActionListener() {
+        btnViewUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Dj-View-icon.png"))); // NOI18N
+        btnViewUser.setText("View");
+        btnViewUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton82ActionPerformed(evt);
+                btnViewUserActionPerformed(evt);
             }
         });
 
@@ -3023,28 +3046,39 @@ private int selectedEventDetailsId;
             }
         });
 
+        UMRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Button-Refresh-icon.png"))); // NOI18N
+        UMRefresh.setText("Refresh");
+        UMRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UMRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel30Layout = new javax.swing.GroupLayout(jPanel30);
         jPanel30.setLayout(jPanel30Layout);
         jPanel30Layout.setHorizontalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel30Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(UMRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(userManAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton82)
+                .addComponent(btnViewUser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(userEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton80))
+                .addComponent(btnUserDelete))
         );
         jPanel30Layout.setVerticalGroup(
             jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel30Layout.createSequentialGroup()
                 .addGroup(jPanel30Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton80)
+                    .addComponent(btnUserDelete)
                     .addComponent(userEdit)
-                    .addComponent(jButton82)
-                    .addComponent(userManAdd))
+                    .addComponent(btnViewUser)
+                    .addComponent(userManAdd)
+                    .addComponent(UMRefresh))
                 .addGap(0, 7, Short.MAX_VALUE))
         );
 
@@ -3067,7 +3101,7 @@ private int selectedEventDetailsId;
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -3480,17 +3514,19 @@ private int selectedEventDetailsId;
 
     private void userEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userEditActionPerformed
         EditUser frm = new EditUser();
+        frm.showUserDetails(selectedUserDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_userEditActionPerformed
 
-    private void jButton82ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton82ActionPerformed
+    private void btnViewUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewUserActionPerformed
         ViewUser frm = new ViewUser();
+        frm.showUserDetails(selectedUserDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
-    }//GEN-LAST:event_jButton82ActionPerformed
+    }//GEN-LAST:event_btnViewUserActionPerformed
 
     private void suppPaymentsAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suppPaymentsAddActionPerformed
         AddSupplierPayment frm = new AddSupplierPayment();
@@ -3530,6 +3566,50 @@ private int selectedEventDetailsId;
         loadEventDetailsTable();
     }//GEN-LAST:event_eventDetailsDeleteActionPerformed
 
+    private void EDsearchKeywordKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EDsearchKeywordKeyTyped
+
+    }//GEN-LAST:event_EDsearchKeywordKeyTyped
+
+    private void EDsearchKeywordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EDsearchKeywordKeyReleased
+        EventDetailsDAO dao = new EventDetailsDAO();
+        int searchType = EDSearchType.getSelectedIndex();
+        if (searchType == 0) {  //Search by event name
+        data_eventDetails = dao.searchEventDetailsEventName(EDsearchKeyword.getText());
+
+        eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_eventDetails, header_eventDetails));
+        jScrollPane3.setViewportView(eventDetailsMainTable);
+        }
+        else if (searchType == 1) { //Search by event location
+        data_eventDetails = dao.searchEventDetailsLocation(EDsearchKeyword.getText());
+
+        eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_eventDetails, header_eventDetails));
+        jScrollPane3.setViewportView(eventDetailsMainTable);
+        }
+        else if (searchType == 2) {    //Search by client name
+        data_eventDetails = dao.searchEventDetailsClientName(EDsearchKeyword.getText());
+
+        eventDetailsMainTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_eventDetails, header_eventDetails));
+        jScrollPane3.setViewportView(eventDetailsMainTable);
+        }
+    }//GEN-LAST:event_EDsearchKeywordKeyReleased
+
+    private void userDetailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userDetailsTableMouseClicked
+        selectRowUserDetails();
+    }//GEN-LAST:event_userDetailsTableMouseClicked
+
+    private void btnUserDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserDeleteActionPerformed
+        UserManagementDAO dao = new UserManagementDAO();
+        dao.deleteUser(selectedUserDetailsId);
+    }//GEN-LAST:event_btnUserDeleteActionPerformed
+
+    private void UMRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UMRefreshActionPerformed
+        loadUserManagementTable();
+        lblStatus.setText("User details table has been refreshed");
+    }//GEN-LAST:event_UMRefreshActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -3564,7 +3644,7 @@ private int selectedEventDetailsId;
             }
         });
     }
-    
+
     public void loadEventDetailsTable() {
 
         EventDetailsDAO dao = new EventDetailsDAO();
@@ -3587,6 +3667,30 @@ private int selectedEventDetailsId;
 
         }
     }
+    
+    public void loadUserManagementTable() {
+
+        UserManagementDAO dao = new UserManagementDAO();
+        data_userManagement = dao.getUserDetails();
+
+        userDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_userManagement, header_userManagement));
+        jScrollPane14.setViewportView(userDetailsTable);
+    }
+    
+    private void selectRowUserDetails() {
+
+        //retrieving the selected row index
+        int row = userDetailsTable.getSelectedRow();
+
+        //if a single row is selected from the table, take each cell values into the controls
+        if (userDetailsTable.getRowSelectionAllowed()) {
+
+            selectedUserDetailsId = Integer.parseInt(userDetailsTable.getValueAt(row, 0).toString());
+
+        }
+        System.out.println("Selected row ID :"+selectedUserDetailsId);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ActivityPlan;
@@ -3595,6 +3699,8 @@ private int selectedEventDetailsId;
     private javax.swing.JPanel ClientPayments;
     private javax.swing.JPanel ClientsManagement;
     private javax.swing.JButton EDRefresh;
+    private javax.swing.JComboBox EDSearchType;
+    private javax.swing.JTextField EDsearchKeyword;
     private javax.swing.JPanel EmployeeManagement;
     private javax.swing.JPanel EquipmentPlan;
     private javax.swing.JPanel EventBudget;
@@ -3606,6 +3712,7 @@ private int selectedEventDetailsId;
     private javax.swing.JPanel StatusBar;
     private javax.swing.JPanel SupplierPayments;
     private javax.swing.JPanel SuppliersManagement;
+    private javax.swing.JButton UMRefresh;
     private javax.swing.JPanel UserManagement;
     private javax.swing.JButton activityPlanAdd;
     private javax.swing.JButton activityPlanDelete;
@@ -3620,8 +3727,9 @@ private int selectedEventDetailsId;
     private javax.swing.JButton btnHome;
     private javax.swing.JButton btnInvoice;
     private javax.swing.JButton btnSupplierOutstanding;
+    private javax.swing.JButton btnUserDelete;
+    private javax.swing.JButton btnViewUser;
     private javax.swing.JButton btnhomeSearch;
-    private javax.swing.JButton btnhomeSearch1;
     private javax.swing.JButton btnhomeSearch10;
     private javax.swing.JButton btnhomeSearch11;
     private javax.swing.JButton btnhomeSearch12;
@@ -3676,7 +3784,6 @@ private int selectedEventDetailsId;
     private javax.swing.JComboBox homeClientList;
     private javax.swing.JSlider homeCompletionSlider;
     private javax.swing.JTextField homeSearch;
-    private javax.swing.JTextField homeSearch1;
     private javax.swing.JTextField homeSearch10;
     private javax.swing.JTextField homeSearch11;
     private javax.swing.JTextField homeSearch12;
@@ -3692,7 +3799,6 @@ private int selectedEventDetailsId;
     private javax.swing.JTextField homeSearch8;
     private javax.swing.JTextField homeSearch9;
     private javax.swing.JComboBox homeSearchTypes;
-    private javax.swing.JComboBox homeSearchTypes1;
     private javax.swing.JComboBox homeSearchTypes10;
     private javax.swing.JComboBox homeSearchTypes11;
     private javax.swing.JComboBox homeSearchTypes12;
@@ -3719,8 +3825,8 @@ private int selectedEventDetailsId;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
     private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton25;
     private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton34;
@@ -3738,11 +3844,8 @@ private int selectedEventDetailsId;
     private javax.swing.JButton jButton74;
     private javax.swing.JButton jButton75;
     private javax.swing.JButton jButton79;
-    private javax.swing.JButton jButton80;
-    private javax.swing.JButton jButton82;
     private javax.swing.JButton jButton88;
     private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox10;
     private javax.swing.JComboBox jComboBox12;
     private javax.swing.JComboBox jComboBox13;
     private javax.swing.JComboBox jComboBox14;
@@ -3770,7 +3873,6 @@ private int selectedEventDetailsId;
     private javax.swing.JComboBox jComboBox35;
     private javax.swing.JComboBox jComboBox36;
     private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBox8;
     private javax.swing.JComboBox jComboBox9;
@@ -3867,7 +3969,6 @@ private int selectedEventDetailsId;
     private javax.swing.JTable jTable11;
     private javax.swing.JTable jTable12;
     private javax.swing.JTable jTable13;
-    private javax.swing.JTable jTable14;
     private javax.swing.JTable jTable15;
     private javax.swing.JTable jTable16;
     private javax.swing.JTable jTable2;
@@ -3887,6 +3988,7 @@ private int selectedEventDetailsId;
     private javax.swing.JButton supplierAdd;
     private javax.swing.JButton supplierEdit;
     private javax.swing.JButton supplierView;
+    private javax.swing.JTable userDetailsTable;
     private javax.swing.JButton userEdit;
     private javax.swing.JButton userManAdd;
     // End of variables declaration//GEN-END:variables

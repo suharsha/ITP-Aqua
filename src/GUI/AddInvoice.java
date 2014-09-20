@@ -7,6 +7,8 @@
 package GUI;
 
 import CLASSES.Themes;
+import java.awt.GraphicsEnvironment;
+import java.awt.Rectangle;
 
 /**
  *
@@ -21,6 +23,8 @@ public class AddInvoice extends javax.swing.JFrame {
         Themes theme = new Themes();
         theme.setIcon(this);
         initComponents();
+        Rectangle rec = GraphicsEnvironment.getLocalGraphicsEnvironment().getMaximumWindowBounds();
+        this.setSize(973, rec.height);
     }
 
     /**
