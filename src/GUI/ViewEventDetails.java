@@ -6,6 +6,7 @@
 
 package GUI;
 
+import CLASSES.ClientDetailsDAO;
 import CLASSES.EventDetails;
 import CLASSES.EventDetailsDAO;
 import CLASSES.Themes;
@@ -32,11 +33,12 @@ public class ViewEventDetails extends javax.swing.JFrame {
     
     public void showEventDetails(int eventId){
         EventDetailsDAO dao = new EventDetailsDAO();
+        ClientDetailsDAO cDAO = new ClientDetailsDAO();
         String[] eventAttributesList = dao.getSelectedEventDetailsStrings(eventId);
-        
+        String clientName = cDAO.returnClientName(Integer.parseInt(eventAttributesList[2]));
         lblName.setText(eventAttributesList[1]); //event name
         lblLocation.setText(eventAttributesList[3]); //event location
-        lblClient.setText(eventAttributesList[2]); //event client
+        lblClient.setText(clientName); //event client
         lblStatus.setText(eventAttributesList[13]); //event status
         lblstartTimeH.setText(eventAttributesList[6]);
         lblstartTimeM.setText(eventAttributesList[7]);

@@ -6,14 +6,15 @@
 
 package GUI;
 
+import CLASSES.ClientDetailsDAO;
 import CLASSES.EventDetails;
 import CLASSES.EventDetailsDAO;
 import CLASSES.Themes;
-import java.text.SimpleDateFormat;
-import javax.swing.JOptionPane;
 import GUI.Home;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Suharsha Wick
@@ -314,10 +315,11 @@ public class AddEventDetails extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         EventDetailsDAO dao = new EventDetailsDAO();
+        ClientDetailsDAO cdao = new ClientDetailsDAO();
         String eventName = txtName.getText();
         //Return client ID from the choosen client name of the combobox
         String client= cmbClient.getSelectedItem().toString();
-        int clientID = dao.returnClientID(client);
+        int clientID = cdao.returnClientID(client);
         
         String eventLocation = txtLocation.getText();
         String eventDescription = txtDescription.getText();

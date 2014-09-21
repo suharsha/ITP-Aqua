@@ -64,32 +64,35 @@ public class EventDetailsDAO {
         return result;
     }
     
-    public int returnClientID(String cName) {
+    
+    
+    public int returnEventID(String eventName) {
+        int id = 0;
        try{
             //Connect to th DB
             dbConn = dbConnManager.connect();
 
             Statement stmt = dbConn.createStatement();
 
-            String query = "SELECT DISTINCT customer_ID FROM client WHERE cus_name ='"+cName+"'";
+            String query = "SELECT DISTINCT eventID FROM Event_Details WHERE name ='"+eventName+"'";
 
             System.out.println(query);
             ResultSet rs = stmt.executeQuery(query);
 
             //
             while (rs.next()) {
-                int id = rs.getInt(1);
-                return id;
+                id = rs.getInt(1);
             }
 
             } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed at EventDetailsDAO.returnClientID.");
+            System.out.println(sQLException + "-----------Select query failed at EventDetailsDAO.returnEventID.");
         }finally{
             //Close the db connection
             dbConnManager.con_close(dbConn);
         }   
-           return -1;
+           return id;
     }
+    
     public int confirmInsertion(EventDetails d) {
        try{
             //Connect to th DB
@@ -116,6 +119,8 @@ public class EventDetailsDAO {
         }   
        return 0;
     }
+    
+  
     public Vector getEventDetails() {
 
         Vector<Vector<String>> eventDetailsVector = null;
@@ -318,7 +323,7 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
             }
 
         } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed at JobCatNames");
+            System.out.println(sQLException + "-----------Select query failed at getClientNamesList");
         }finally{
             //how ever you are going to execute that part.that's why conclose happening inside filnally block.
             //Close the db connection
@@ -327,157 +332,47 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
         return ClientNamesList;
     }
     
-    public Vector sortEventDetailsNameAZ() {
+    public ArrayList getEventNames(){
 
-        Vector<Vector<String>> eventDetailsVector = null;
+            //arraylist is having behaviours of arrys
+        ArrayList eventsList = null;
 	Connection dbConn = null;
 
-        try {
+        try{
+            //connect with db, create the statement and using that execute the query
+            //Connect to th DB
             dbConn = dbConnManager.connect();
+
             Statement stmt = dbConn.createStatement();
 
-            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
-                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
-                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by e.name";
+            //Select the JobCatNames
+            String query = "SELECT DISTINCT name FROM Event_Details";
 
+            System.out.println(query);
+            //by this query we are getting more than one value
             ResultSet rs = stmt.executeQuery(query);
-            eventDetailsVector = new Vector<Vector<String>>();
 
+            //one by one from resultset,we have to add values to your arraylist.this is done by while loop
+            eventsList = new ArrayList();
+
+            //
             while (rs.next()) {
-                Vector<String> eventDetails = new Vector<String>();
-                eventDetails.add(rs.getString(1));
-                eventDetails.add(rs.getString(2));
-                eventDetails.add(rs.getString(3));
-                eventDetails.add(rs.getString(4));
-                eventDetails.add(rs.getString(6));
-                eventDetails.add(rs.getString(7));
-                eventDetails.add(rs.getString(8));
-                eventDetails.add(rs.getString(9));
-                eventDetails.add(rs.getString(10));
-                eventDetailsVector.add(eventDetails);
+                String eventName = rs.getString(1);
+                System.out.println(eventName);
+                eventsList.add(eventName);
             }
 
         } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed");
-        } finally {
+            System.out.println(sQLException + "-----------Select query failed at EventDetailsDAO.getEventNames");
+        }finally{
+            //how ever you are going to execute that part.that's why conclose happening inside filnally block.
+            //Close the db connection
             dbConnManager.con_close(dbConn);
         }
-        return eventDetailsVector;
+        return eventsList;
     }
     
-    public Vector sortEventDetailsNameZA() {
-
-        Vector<Vector<String>> eventDetailsVector = null;
-	Connection dbConn = null;
-
-        try {
-            dbConn = dbConnManager.connect();
-            Statement stmt = dbConn.createStatement();
-
-            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
-                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
-                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by e.name DESC ";
-
-            ResultSet rs = stmt.executeQuery(query);
-            eventDetailsVector = new Vector<Vector<String>>();
-
-            while (rs.next()) {
-                Vector<String> eventDetails = new Vector<String>();
-                eventDetails.add(rs.getString(1));
-                eventDetails.add(rs.getString(2));
-                eventDetails.add(rs.getString(3));
-                eventDetails.add(rs.getString(4));
-                eventDetails.add(rs.getString(6));
-                eventDetails.add(rs.getString(7));
-                eventDetails.add(rs.getString(8));
-                eventDetails.add(rs.getString(9));
-                eventDetails.add(rs.getString(10));
-                eventDetailsVector.add(eventDetails);
-            }
-
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed");
-        } finally {
-            dbConnManager.con_close(dbConn);
-        }
-        return eventDetailsVector;
-    }
-    
-    public Vector sortEventDetailsClientNameAZ() {
-
-        Vector<Vector<String>> eventDetailsVector = null;
-	Connection dbConn = null;
-
-        try {
-            dbConn = dbConnManager.connect();
-            Statement stmt = dbConn.createStatement();
-
-            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
-                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
-                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by c.cus_name";
-
-            ResultSet rs = stmt.executeQuery(query);
-            eventDetailsVector = new Vector<Vector<String>>();
-
-            while (rs.next()) {
-                Vector<String> eventDetails = new Vector<String>();
-                eventDetails.add(rs.getString(1));
-                eventDetails.add(rs.getString(2));
-                eventDetails.add(rs.getString(3));
-                eventDetails.add(rs.getString(4));
-                eventDetails.add(rs.getString(6));
-                eventDetails.add(rs.getString(7));
-                eventDetails.add(rs.getString(8));
-                eventDetails.add(rs.getString(9));
-                eventDetails.add(rs.getString(10));
-                eventDetailsVector.add(eventDetails);
-            }
-
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed");
-        } finally {
-            dbConnManager.con_close(dbConn);
-        }
-        return eventDetailsVector;
-    }
-    
-    public Vector sortEventDetailsClientNameZA() {
-
-        Vector<Vector<String>> eventDetailsVector = null;
-	Connection dbConn = null;
-
-        try {
-            dbConn = dbConnManager.connect();
-            Statement stmt = dbConn.createStatement();
-
-            String query = "SELECT  e.eventID, e.name, c.cus_name, e.location,e.Description, e.StartDate, CONCAT_WS(' ',CONCAT_WS(':',e.StartTimeHours,e.StartTimeMinutes),e.StartTimeAm),"
-                    + " e.EndDate,CONCAT_WS(' ',CONCAT_WS(':',e.EndTimeHours,e.EndTimeMinutes),e.EndTimeAm),status "+
-                    "FROM Event_Details e, client c WHERE e.client = c.customer_ID order by c.cus_name DESC";
-
-            ResultSet rs = stmt.executeQuery(query);
-            eventDetailsVector = new Vector<Vector<String>>();
-
-            while (rs.next()) {
-                Vector<String> eventDetails = new Vector<String>();
-                eventDetails.add(rs.getString(1));
-                eventDetails.add(rs.getString(2));
-                eventDetails.add(rs.getString(3));
-                eventDetails.add(rs.getString(4));
-                eventDetails.add(rs.getString(6));
-                eventDetails.add(rs.getString(7));
-                eventDetails.add(rs.getString(8));
-                eventDetails.add(rs.getString(9));
-                eventDetails.add(rs.getString(10));
-                eventDetailsVector.add(eventDetails);
-            }
-
-        } catch (SQLException sQLException) {
-            System.out.println(sQLException + "-----------Select query failed");
-        } finally {
-            dbConnManager.con_close(dbConn);
-        }
-        return eventDetailsVector;
-    }
+   
     
     public Vector searchEventDetailsEventName(String keyword) {
 

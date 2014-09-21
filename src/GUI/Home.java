@@ -143,9 +143,6 @@ private int selectedUserDetailsId;
         homeSearch15 = new javax.swing.JTextField();
         homeSearchTypes15 = new javax.swing.JComboBox();
         btnhomeSearch15 = new javax.swing.JButton();
-        jComboBox33 = new javax.swing.JComboBox();
-        jComboBox34 = new javax.swing.JComboBox();
-        jButton27 = new javax.swing.JButton();
         jLabel27 = new javax.swing.JLabel();
         jPanel38 = new javax.swing.JPanel();
         eventDetailsDelete1 = new javax.swing.JButton();
@@ -980,12 +977,6 @@ private int selectedUserDetailsId;
 
         btnhomeSearch15.setText("Search");
 
-        jComboBox33.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox34.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton27.setText("Sort");
-
         javax.swing.GroupLayout jPanel37Layout = new javax.swing.GroupLayout(jPanel37);
         jPanel37.setLayout(jPanel37Layout);
         jPanel37Layout.setHorizontalGroup(
@@ -997,13 +988,7 @@ private int selectedUserDetailsId;
                 .addComponent(homeSearchTypes15, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnhomeSearch15)
-                .addGap(298, 298, 298)
-                .addComponent(jComboBox33, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox34, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton27)
-                .addContainerGap(86, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel37Layout.setVerticalGroup(
             jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1012,10 +997,7 @@ private int selectedUserDetailsId;
                 .addGroup(jPanel37Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(homeSearch15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(homeSearchTypes15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhomeSearch15)
-                    .addComponent(jComboBox33, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox34, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton27))
+                    .addComponent(btnhomeSearch15))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -1088,7 +1070,7 @@ private int selectedUserDetailsId;
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, InvoiceLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(InvoiceLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane16)
+                    .addComponent(jScrollPane16, javax.swing.GroupLayout.DEFAULT_SIZE, 1128, Short.MAX_VALUE)
                     .addComponent(jPanel37, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel38, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -3352,7 +3334,7 @@ private int selectedUserDetailsId;
     }//GEN-LAST:event_invoiceViewActionPerformed
 
     private void invoiceAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceAddActionPerformed
-        AddInvoice frm = new AddInvoice();
+        InvoiceChooseDetails frm = new InvoiceChooseDetails();
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3827,7 +3809,6 @@ private int selectedUserDetailsId;
     private javax.swing.JButton jButton17;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton24;
-    private javax.swing.JButton jButton27;
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton34;
     private javax.swing.JButton jButton39;
@@ -3868,8 +3849,6 @@ private int selectedUserDetailsId;
     private javax.swing.JComboBox jComboBox30;
     private javax.swing.JComboBox jComboBox31;
     private javax.swing.JComboBox jComboBox32;
-    private javax.swing.JComboBox jComboBox33;
-    private javax.swing.JComboBox jComboBox34;
     private javax.swing.JComboBox jComboBox35;
     private javax.swing.JComboBox jComboBox36;
     private javax.swing.JComboBox jComboBox4;
