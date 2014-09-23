@@ -6,14 +6,21 @@
 
 package GUI;
 
+import CLASSES.ClientDetails;
+import CLASSES.ClientDetailsDAO;
 import CLASSES.Themes;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Suharsha Wick
  */
 public class EditClient extends javax.swing.JFrame {
-
+public String currentUser;
+public int clientID;
     /**
      * Creates new form AddEventDetails
      */
@@ -21,6 +28,20 @@ public class EditClient extends javax.swing.JFrame {
         Themes theme = new Themes();
         theme.setIcon(this);
         initComponents();
+    }
+    
+        public void setCurrentUser(String user){
+        currentUser = user;
+    }
+        
+        public void showClientDetails(int clientId){
+        ClientDetailsDAO dao = new ClientDetailsDAO();
+        String[] clientAttributesList = dao.getSelectedClientDetails(clientId);
+        clientID = clientId;
+        txtName.setText(clientAttributesList[1]);
+        txtTelephone.setText(clientAttributesList[3]);
+        txtAddress.setText(clientAttributesList[2]);
+        txtEmail.setText(clientAttributesList[4]);
     }
 
     /**
@@ -35,14 +56,14 @@ public class EditClient extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTelephone = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txtAddress = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        txtEmail = new javax.swing.JTextField();
+        clientUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Edit Client");
@@ -61,8 +82,13 @@ public class EditClient extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("Email :");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/save.png"))); // NOI18N
-        jButton1.setText("Save");
+        clientUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/save.png"))); // NOI18N
+        clientUpdate.setText("Save");
+        clientUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -79,13 +105,13 @@ public class EditClient extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField3)
-                            .addComponent(jTextField4)))
+                            .addComponent(txtTelephone, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE)
+                            .addComponent(txtName)
+                            .addComponent(txtAddress)
+                            .addComponent(txtEmail)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(154, 154, 154)
-                        .addComponent(jButton1)))
+                        .addGap(118, 118, 118)
+                        .addComponent(clientUpdate)))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -94,22 +120,22 @@ public class EditClient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelephone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
-                .addComponent(jButton1)
-                .addContainerGap(41, Short.MAX_VALUE))
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(clientUpdate)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -142,6 +168,30 @@ public class EditClient extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void clientUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientUpdateActionPerformed
+        int result = JOptionPane.showConfirmDialog(null,"Are you sure you wish to update the selected event?",null, JOptionPane.YES_NO_OPTION);
+        if(result == JOptionPane.YES_OPTION) {
+        String clientName = txtName.getText();        
+        String telephone = txtTelephone.getText();
+        String address = txtAddress.getText();
+        String email = txtEmail.getText();
+        String loggedUser = currentUser;
+        String isModified = "Yes";
+        DateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        String modifedDate = currentDate.format(date);
+
+        ClientDetails d = new ClientDetails(clientName,address,telephone,email,isModified,modifedDate,loggedUser);
+
+        //Save to the database
+        ClientDetailsDAO dao = new ClientDetailsDAO();
+        dao.updateClient(d, clientID);
+
+        JOptionPane.showMessageDialog(this,"Event details updated successfully!","Successful",JOptionPane.INFORMATION_MESSAGE);
+        }
+        this.dispose();
+    }//GEN-LAST:event_clientUpdateActionPerformed
 
     /**
      * @param args the command line arguments
@@ -179,16 +229,16 @@ public class EditClient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton clientUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField txtAddress;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtTelephone;
     // End of variables declaration//GEN-END:variables
 }

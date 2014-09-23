@@ -196,6 +196,7 @@ public class AddUser extends javax.swing.JFrame {
         DateFormat currentDate = new SimpleDateFormat("yyyy/MM/dd");
         Date date = new Date();
         String addedDate = currentDate.format(date);
+
         String passwordd = password.getText();
         int employeeID = Integer.parseInt(empID.getSelectedItem().toString());
         String employeeName = empName.getText();

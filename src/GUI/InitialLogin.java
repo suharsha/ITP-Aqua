@@ -99,6 +99,7 @@ public class InitialLogin extends javax.swing.JFrame {
         System.out.println("Got pass :" + passwordd);
         if (passwordd.equals(EncryptedPassword)){   //Checks for the equility of 2 encrypted passwords
         Home frm = new Home();
+        frm.showLoggedInUser(userName);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);

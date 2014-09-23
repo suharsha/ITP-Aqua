@@ -6,6 +6,7 @@
 
 package GUI;
 
+import CLASSES.SupplierDetailsDAO;
 import CLASSES.Themes;
 
 /**
@@ -21,6 +22,22 @@ public class ViewSupplier extends javax.swing.JFrame {
         Themes theme = new Themes();
         theme.setIcon(this);
         initComponents();
+    }
+    
+    public void showSupplierDetails(int supplierId){
+        SupplierDetailsDAO dao = new SupplierDetailsDAO();
+        String[] userAttributesList = dao.getSelectedSupplierDetailsStrings(supplierId);
+
+        lblName.setText(userAttributesList[1]);
+        lblItem.setText(userAttributesList[4]); //user level
+        lblRate.setText(userAttributesList[2]); //event status
+        lblEmail.setText(userAttributesList[5]);
+        lblAddress.setText(userAttributesList[3]); //event status
+        lblTelephone.setText(userAttributesList[6]);
+        lblAddedDate.setText(userAttributesList[7]);
+        lblAddedBy.setText(userAttributesList[8]);
+        lblMDate.setText(userAttributesList[9]);
+        lblMBy.setText(userAttributesList[10]);
     }
 
     /**
@@ -39,14 +56,21 @@ public class ViewSupplier extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
+        lblName = new javax.swing.JLabel();
+        lblItem = new javax.swing.JLabel();
+        lblRate = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblTelephone = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblAddedDate = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblAddedBy = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
+        lblMBy = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        lblMDate = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("View Supplier");
@@ -68,23 +92,40 @@ public class ViewSupplier extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Address :");
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setEnabled(false);
-        jScrollPane1.setViewportView(jTextArea1);
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Telephone :");
 
-        jLabel7.setText("jLabel7");
+        lblName.setText("jLabel7");
 
-        jLabel8.setText("jLabel8");
+        lblItem.setText("jLabel8");
 
-        jLabel9.setText("jLabel9");
+        lblRate.setText("jLabel9");
 
-        jLabel10.setText("jLabel10");
+        lblEmail.setText("jLabel10");
 
-        jLabel11.setText("jLabel11");
+        lblTelephone.setText("jLabel11");
+
+        lblAddress.setText("jLabel7");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Added Date :");
+
+        lblAddedDate.setText("jLabel8");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Added By :");
+
+        lblAddedBy.setText("jLabel9");
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("Modified By :");
+
+        lblMBy.setText("jLabel10");
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setText("Modified Date :");
+
+        lblMDate.setText("jLabel11");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -97,58 +138,81 @@ public class ViewSupplier extends javax.swing.JFrame {
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addComponent(jLabel2)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8))
+                            .addComponent(lblItem))
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9))
+                            .addComponent(lblRate))
                         .addGroup(jPanel7Layout.createSequentialGroup()
                             .addComponent(jLabel3)
                             .addGap(18, 18, 18)
-                            .addComponent(jLabel7)))
+                            .addComponent(lblName)))
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10)))
-                .addGap(245, 245, 245)
+                        .addComponent(lblEmail))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblMBy)))
+                .addGap(210, 210, 210)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMDate))
                     .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel5))
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel11)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTelephone)
+                            .addComponent(lblAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblAddedBy)
+                            .addComponent(lblAddedDate))))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel8))
-                        .addGap(31, 31, 31)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel9)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(lblName)
+                    .addComponent(lblAddress))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(lblItem)
                     .addComponent(jLabel6)
+                    .addComponent(lblTelephone))
+                .addGap(31, 31, 31)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblRate)
+                    .addComponent(jLabel7)
+                    .addComponent(lblAddedDate))
+                .addGap(30, 30, 30)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(lblEmail)
+                    .addComponent(jLabel8)
+                    .addComponent(lblAddedBy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(lblMBy)
                     .addComponent(jLabel10)
-                    .addComponent(jLabel11))
-                .addContainerGap(24, Short.MAX_VALUE))
+                    .addComponent(lblMDate))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -176,7 +240,9 @@ public class ViewSupplier extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -220,7 +286,6 @@ public class ViewSupplier extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -231,7 +296,15 @@ public class ViewSupplier extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JLabel lblAddedBy;
+    private javax.swing.JLabel lblAddedDate;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblItem;
+    private javax.swing.JLabel lblMBy;
+    private javax.swing.JLabel lblMDate;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblRate;
+    private javax.swing.JLabel lblTelephone;
     // End of variables declaration//GEN-END:variables
 }

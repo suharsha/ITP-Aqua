@@ -6,6 +6,7 @@
 
 package GUI;
 
+import CLASSES.ClientDetailsDAO;
 import CLASSES.Themes;
 
 /**
@@ -21,6 +22,20 @@ public class ViewClient extends javax.swing.JFrame {
         Themes theme = new Themes();
         theme.setIcon(this);
         initComponents();
+    }
+    
+        public void showClientDetails(int clientId){
+        ClientDetailsDAO dao = new ClientDetailsDAO();
+        String[] clientAttributesList = dao.getSelectedClientDetails(clientId);
+        
+        lblName.setText(clientAttributesList[1]);
+        lblTelephone.setText(clientAttributesList[3]);
+        lblAddress.setText(clientAttributesList[2]);
+        lblEmail.setText(clientAttributesList[4]);
+        lbladdedDate.setText(clientAttributesList[5]);
+        lblAddedBy.setText(clientAttributesList[6]);
+        lblModifiedDate.setText(clientAttributesList[7]);
+        lblModifiedBy.setText(clientAttributesList[8]);
     }
 
     /**
@@ -39,10 +54,18 @@ public class ViewClient extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        lblName = new javax.swing.JLabel();
+        lblTelephone = new javax.swing.JLabel();
+        lblAddress = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        lbladdedDate = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        lblAddedBy = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        lblModifiedDate = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        lblModifiedBy = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("View Client");
@@ -63,13 +86,33 @@ public class ViewClient extends javax.swing.JFrame {
 
         jButton2.setText("View Committee Members");
 
-        jLabel5.setText("jLabel5");
+        lblName.setText("jLabel5");
 
-        jLabel6.setText("jLabel6");
+        lblTelephone.setText("jLabel6");
 
-        jLabel7.setText("jLabel7");
+        lblAddress.setText("jLabel7");
 
-        jLabel8.setText("jLabel8");
+        lblEmail.setText("jLabel8");
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setText("Added Date :");
+
+        lbladdedDate.setText("jLabel6");
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setText("Added By :");
+
+        lblAddedBy.setText("jLabel7");
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setText("Modified Date :");
+
+        lblModifiedDate.setText("jLabel8");
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setText("Modified By :");
+
+        lblModifiedBy.setText("jLabel9");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -78,43 +121,68 @@ public class ViewClient extends javax.swing.JFrame {
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton2)
+                            .addGroup(jPanel7Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblName)
+                                    .addComponent(lblAddress)
+                                    .addComponent(lblEmail)
+                                    .addComponent(lblTelephone)
+                                    .addComponent(lbladdedDate)
+                                    .addComponent(lblAddedBy)
+                                    .addComponent(lblModifiedDate)
+                                    .addComponent(lblModifiedBy)))))
                     .addComponent(jLabel4)
-                    .addComponent(jLabel1))
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2))
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8))))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel8))
                 .addContainerGap(106, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel5))
+                    .addComponent(lblName))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(lblAddress))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel6))
+                    .addComponent(lblTelephone))
                 .addGap(31, 31, 31)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel7))
+                    .addComponent(lblEmail)
+                    .addComponent(jLabel1))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel5)
+                    .addComponent(lbladdedDate))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblAddedBy))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(lblModifiedDate))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(lblModifiedBy))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(25, 25, 25))
         );
@@ -144,7 +212,9 @@ public class ViewClient extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 28, Short.MAX_VALUE))
         );
 
         pack();
@@ -197,5 +267,13 @@ public class ViewClient extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel7;
+    private javax.swing.JLabel lblAddedBy;
+    private javax.swing.JLabel lblAddress;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblModifiedBy;
+    private javax.swing.JLabel lblModifiedDate;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblTelephone;
+    private javax.swing.JLabel lbladdedDate;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,13 +6,23 @@
 
 package GUI;
 
+import CLASSES.ClientDetailsDAO;
+import CLASSES.EmployeeManagementDAO;
 import CLASSES.EventDetailsDAO;
+import CLASSES.SupplierDetailsDAO;
 import CLASSES.Themes;
 import CLASSES.UserManagementDAO;
 import java.awt.CardLayout;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
+import static java.lang.Thread.sleep;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,10 +35,21 @@ private Vector<String> header_eventDetails; //Used to store data header
 private Vector<Vector<String>> data_userManagement; //Used for data from database
 private Vector<String> header_userManagement; //Used to store data header
 
-private Vector<Vector<String>> data;
+private Vector<Vector<String>> data_clientDetails; //Used for data from database
+private Vector<String> header_clientDetails; //Used to store data header
 
+private Vector<Vector<String>> data_employeeDetails; //Used for data from database
+private Vector<String> header_employeeDetails; //Used to store data header
+
+private Vector<Vector<String>> data_supplierDetails; //Used for data from database
+private Vector<String> header_supplierDetails; //Used to store data header
+
+
+private String currentUser="";
 private int selectedEventDetailsId;
 private int selectedUserDetailsId;
+private int selectedClientDetailsId;
+private int selectedSupplierDetailsId;
     /**
      * Creates new form Home
      */
@@ -60,11 +81,68 @@ private int selectedUserDetailsId;
         header_userManagement.add("Password");
         header_userManagement.add("Added Date");
         header_userManagement.add("Modified Date");
+        
+        header_clientDetails = new Vector<String>();
+        header_clientDetails.add("Client ID");
+        header_clientDetails.add("Name");
+        header_clientDetails.add("Address");
+        header_clientDetails.add("Telephone");
+        header_clientDetails.add("Email");
 
+        header_employeeDetails = new Vector<String>();
+        header_employeeDetails.add("Employee ID");
+        header_employeeDetails.add("Title");
+        header_employeeDetails.add("First Name");
+        header_employeeDetails.add("Middle Name");
+        header_employeeDetails.add("Last Name");
+        header_employeeDetails.add("Job Title");
+        header_employeeDetails.add("Gender");
+        
+        header_supplierDetails = new Vector<String>();
+        header_supplierDetails.add("Supplier ID");
+        header_supplierDetails.add("Name");
+        header_supplierDetails.add("Item");
+        header_supplierDetails.add("Rate");
+        header_supplierDetails.add("Address");
         
         loadEventDetailsTable();
+        loadClientDetailsTable();
         loadUserManagementTable();
+        loadEmployeeDetailsTable();
+        loadSupplierDetailsTable();
+        CurrentDate();
     }
+    
+    public void showLoggedInUser(String userName){
+        currentUser = userName;
+        lblLoggedInUser.setText(currentUser);
+    }
+    
+    public void CurrentDate() {
+            Thread clock = new Thread(){
+        public void run(){
+         for(;;){
+            Calendar cal = new GregorianCalendar();
+            int month = cal.get(Calendar.MONTH);
+            int year = cal.get(Calendar.YEAR);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            lblDate.setText(year+"-"+(month+1)+"-"+day);
+        
+            int second = cal.get(Calendar.SECOND);
+            int minute = cal.get(Calendar.MINUTE);
+            int hour = cal.get(Calendar.HOUR); 
+            lblTime.setText(hour+":"+minute+":"+second);
+ 
+            try {
+                sleep(1000);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(Home.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+    }};
+    clock.start();
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -288,27 +366,22 @@ private int selectedUserDetailsId;
         jTabbedPane3 = new javax.swing.JTabbedPane();
         jPanel4 = new javax.swing.JPanel();
         jPanel39 = new javax.swing.JPanel();
-        clientDetailsDetails = new javax.swing.JButton();
+        clientDetailsDelete = new javax.swing.JButton();
         clientDetailsEdit = new javax.swing.JButton();
         clientDetailsView = new javax.swing.JButton();
         clientDetailsAdd = new javax.swing.JButton();
+        CMRefresh = new javax.swing.JButton();
         jPanel40 = new javax.swing.JPanel();
         homeSearch16 = new javax.swing.JTextField();
         homeSearchTypes16 = new javax.swing.JComboBox();
         btnhomeSearch16 = new javax.swing.JButton();
-        jComboBox35 = new javax.swing.JComboBox();
-        jComboBox36 = new javax.swing.JComboBox();
-        jButton88 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        clientDetails = new javax.swing.JTable();
         jPanel6 = new javax.swing.JPanel();
         jPanel23 = new javax.swing.JPanel();
         homeSearch10 = new javax.swing.JTextField();
         homeSearchTypes10 = new javax.swing.JComboBox();
         btnhomeSearch10 = new javax.swing.JButton();
-        jComboBox23 = new javax.swing.JComboBox();
-        jComboBox24 = new javax.swing.JComboBox();
-        jButton64 = new javax.swing.JButton();
         jPanel24 = new javax.swing.JPanel();
         comMemberDelete = new javax.swing.JButton();
         comMemberEdit = new javax.swing.JButton();
@@ -318,7 +391,7 @@ private int selectedUserDetailsId;
         jTable11 = new javax.swing.JTable();
         SuppliersManagement = new javax.swing.JPanel();
         jScrollPane12 = new javax.swing.JScrollPane();
-        jTable12 = new javax.swing.JTable();
+        supplierTable = new javax.swing.JTable();
         jPanel25 = new javax.swing.JPanel();
         homeSearch11 = new javax.swing.JTextField();
         homeSearchTypes11 = new javax.swing.JComboBox();
@@ -328,13 +401,14 @@ private int selectedUserDetailsId;
         jButton69 = new javax.swing.JButton();
         jLabel24 = new javax.swing.JLabel();
         jPanel26 = new javax.swing.JPanel();
-        jButton70 = new javax.swing.JButton();
+        supplierDelete = new javax.swing.JButton();
         supplierEdit = new javax.swing.JButton();
         supplierView = new javax.swing.JButton();
         supplierAdd = new javax.swing.JButton();
+        supplierRefresh = new javax.swing.JButton();
         EmployeeManagement = new javax.swing.JPanel();
         jScrollPane13 = new javax.swing.JScrollPane();
-        jTable13 = new javax.swing.JTable();
+        employeeDetails = new javax.swing.JTable();
         jPanel27 = new javax.swing.JPanel();
         homeSearch12 = new javax.swing.JTextField();
         homeSearchTypes12 = new javax.swing.JComboBox();
@@ -349,8 +423,6 @@ private int selectedUserDetailsId;
         employeeView = new javax.swing.JButton();
         employeeAdd = new javax.swing.JButton();
         UserManagement = new javax.swing.JPanel();
-        jScrollPane14 = new javax.swing.JScrollPane();
-        userDetailsTable = new javax.swing.JTable();
         jPanel29 = new javax.swing.JPanel();
         homeSearch13 = new javax.swing.JTextField();
         homeSearchTypes13 = new javax.swing.JComboBox();
@@ -365,8 +437,14 @@ private int selectedUserDetailsId;
         btnViewUser = new javax.swing.JButton();
         userManAdd = new javax.swing.JButton();
         UMRefresh = new javax.swing.JButton();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        userDetailsTable = new javax.swing.JTable();
         StatusBar = new javax.swing.JPanel();
         lblStatus = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblLoggedInUser = new javax.swing.JLabel();
+        lblDate = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -2335,8 +2413,13 @@ private int selectedUserDetailsId;
 
         jPanel39.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        clientDetailsDetails.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
-        clientDetailsDetails.setText("Delete");
+        clientDetailsDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
+        clientDetailsDelete.setText("Delete");
+        clientDetailsDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientDetailsDeleteActionPerformed(evt);
+            }
+        });
 
         clientDetailsEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
         clientDetailsEdit.setText("Edit");
@@ -2362,29 +2445,40 @@ private int selectedUserDetailsId;
             }
         });
 
+        CMRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Button-Refresh-icon.png"))); // NOI18N
+        CMRefresh.setText("Refresh");
+        CMRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CMRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel39Layout = new javax.swing.GroupLayout(jPanel39);
         jPanel39.setLayout(jPanel39Layout);
         jPanel39Layout.setHorizontalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel39Layout.createSequentialGroup()
-                .addGap(0, 781, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(CMRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(clientDetailsAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clientDetailsView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(clientDetailsEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(clientDetailsDetails))
+                .addComponent(clientDetailsDelete))
         );
         jPanel39Layout.setVerticalGroup(
             jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel39Layout.createSequentialGroup()
                 .addGroup(jPanel39Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(clientDetailsDetails)
+                    .addComponent(clientDetailsDelete)
                     .addComponent(clientDetailsEdit)
                     .addComponent(clientDetailsView)
-                    .addComponent(clientDetailsAdd))
-                .addGap(0, 7, Short.MAX_VALUE))
+                    .addComponent(clientDetailsAdd)
+                    .addComponent(CMRefresh))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         jPanel40.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
@@ -2392,12 +2486,6 @@ private int selectedUserDetailsId;
         homeSearchTypes16.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Location", "Client" }));
 
         btnhomeSearch16.setText("Search");
-
-        jComboBox35.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox36.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton88.setText("Sort");
 
         javax.swing.GroupLayout jPanel40Layout = new javax.swing.GroupLayout(jPanel40);
         jPanel40.setLayout(jPanel40Layout);
@@ -2410,13 +2498,7 @@ private int selectedUserDetailsId;
                 .addComponent(homeSearchTypes16, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnhomeSearch16)
-                .addGap(298, 298, 298)
-                .addComponent(jComboBox35, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox36, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton88)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel40Layout.setVerticalGroup(
             jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2425,14 +2507,11 @@ private int selectedUserDetailsId;
                 .addGroup(jPanel40Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(homeSearch16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(homeSearchTypes16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhomeSearch16)
-                    .addComponent(jComboBox35, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox36, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton88))
+                    .addComponent(btnhomeSearch16))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        clientDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2443,7 +2522,12 @@ private int selectedUserDetailsId;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        clientDetails.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                clientDetailsMouseClicked(evt);
+            }
+        });
+        jScrollPane4.setViewportView(clientDetails);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -2454,7 +2538,7 @@ private int selectedUserDetailsId;
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel39, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel40, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane4))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 1103, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
@@ -2477,12 +2561,6 @@ private int selectedUserDetailsId;
 
         btnhomeSearch10.setText("Search");
 
-        jComboBox23.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jComboBox24.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jButton64.setText("Sort");
-
         javax.swing.GroupLayout jPanel23Layout = new javax.swing.GroupLayout(jPanel23);
         jPanel23.setLayout(jPanel23Layout);
         jPanel23Layout.setHorizontalGroup(
@@ -2494,13 +2572,7 @@ private int selectedUserDetailsId;
                 .addComponent(homeSearchTypes10, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(btnhomeSearch10)
-                .addGap(298, 298, 298)
-                .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton64)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel23Layout.setVerticalGroup(
             jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2509,10 +2581,7 @@ private int selectedUserDetailsId;
                 .addGroup(jPanel23Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(homeSearch10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(homeSearchTypes10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnhomeSearch10)
-                    .addComponent(jComboBox23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton64))
+                    .addComponent(btnhomeSearch10))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -2630,7 +2699,7 @@ private int selectedUserDetailsId;
 
         CardsPanel.add(ClientsManagement, "cClientsManagement");
 
-        jTable12.setModel(new javax.swing.table.DefaultTableModel(
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2641,7 +2710,12 @@ private int selectedUserDetailsId;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane12.setViewportView(jTable12);
+        supplierTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                supplierTableMouseClicked(evt);
+            }
+        });
+        jScrollPane12.setViewportView(supplierTable);
 
         jPanel25.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
@@ -2697,8 +2771,13 @@ private int selectedUserDetailsId;
 
         jPanel26.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jButton70.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
-        jButton70.setText("Delete");
+        supplierDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/delete.png"))); // NOI18N
+        supplierDelete.setText("Delete");
+        supplierDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierDeleteActionPerformed(evt);
+            }
+        });
 
         supplierEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/setting-icon.png"))); // NOI18N
         supplierEdit.setText("Edit");
@@ -2724,29 +2803,40 @@ private int selectedUserDetailsId;
             }
         });
 
+        supplierRefresh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IMAGES/Button-Refresh-icon.png"))); // NOI18N
+        supplierRefresh.setText("Refresh");
+        supplierRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                supplierRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel26Layout = new javax.swing.GroupLayout(jPanel26);
         jPanel26.setLayout(jPanel26Layout);
         jPanel26Layout.setHorizontalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel26Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(supplierRefresh)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(supplierAdd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(supplierView)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(supplierEdit)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton70))
+                .addComponent(supplierDelete))
         );
         jPanel26Layout.setVerticalGroup(
             jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel26Layout.createSequentialGroup()
                 .addGroup(jPanel26Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton70)
+                    .addComponent(supplierDelete)
                     .addComponent(supplierEdit)
                     .addComponent(supplierView)
-                    .addComponent(supplierAdd))
-                .addGap(0, 7, Short.MAX_VALUE))
+                    .addComponent(supplierAdd)
+                    .addComponent(supplierRefresh))
+                .addGap(0, 14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout SuppliersManagementLayout = new javax.swing.GroupLayout(SuppliersManagement);
@@ -2777,7 +2867,7 @@ private int selectedUserDetailsId;
 
         CardsPanel.add(SuppliersManagement, "cSuppliersManagement");
 
-        jTable13.setModel(new javax.swing.table.DefaultTableModel(
+        employeeDetails.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -2788,7 +2878,7 @@ private int selectedUserDetailsId;
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane13.setViewportView(jTable13);
+        jScrollPane13.setViewportView(employeeDetails);
 
         jPanel27.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
@@ -2924,24 +3014,6 @@ private int selectedUserDetailsId;
 
         CardsPanel.add(EmployeeManagement, "cEmployeeManagement");
 
-        userDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        userDetailsTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                userDetailsTableMouseClicked(evt);
-            }
-        });
-        jScrollPane14.setViewportView(userDetailsTable);
-
         jPanel29.setBorder(javax.swing.BorderFactory.createTitledBorder("Search | Sort"));
 
         homeSearchTypes13.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Name", "Location", "Client" }));
@@ -3061,8 +3133,26 @@ private int selectedUserDetailsId;
                     .addComponent(btnViewUser)
                     .addComponent(userManAdd)
                     .addComponent(UMRefresh))
-                .addGap(0, 7, Short.MAX_VALUE))
+                .addGap(7, 7, 7))
         );
+
+        userDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        userDetailsTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userDetailsTableMouseClicked(evt);
+            }
+        });
+        jScrollPane17.setViewportView(userDetailsTable);
 
         javax.swing.GroupLayout UserManagementLayout = new javax.swing.GroupLayout(UserManagement);
         UserManagement.setLayout(UserManagementLayout);
@@ -3072,9 +3162,9 @@ private int selectedUserDetailsId;
             .addGroup(UserManagementLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(UserManagementLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane14, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane17))
                 .addContainerGap())
         );
         UserManagementLayout.setVerticalGroup(
@@ -3083,28 +3173,50 @@ private int selectedUserDetailsId;
                 .addComponent(jLabel26)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel30, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 468, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
         );
 
         CardsPanel.add(UserManagement, "cUsersManagement");
 
         StatusBar.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setText("Logged in as :");
+
+        lblLoggedInUser.setText("jLabel12");
+
+        lblDate.setText("jLabel12");
+
+        lblTime.setText("jLabel13");
+
         javax.swing.GroupLayout StatusBarLayout = new javax.swing.GroupLayout(StatusBar);
         StatusBar.setLayout(StatusBarLayout);
         StatusBarLayout.setHorizontalGroup(
             StatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StatusBarLayout.createSequentialGroup()
-                .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 745, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblDate, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblLoggedInUser, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         StatusBarLayout.setVerticalGroup(
             StatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, 20, Short.MAX_VALUE)
+            .addComponent(lblStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblLoggedInUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(StatusBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(lblDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout BasePanelLayout = new javax.swing.GroupLayout(BasePanel);
@@ -3263,7 +3375,7 @@ private int selectedUserDetailsId;
     }//GEN-LAST:event_equipmentPlanViewActionPerformed
 
     private void activityPlanAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activityPlanAddActionPerformed
-        AddActivityPlan frm = new AddActivityPlan();
+        APChooseEvent frm = new APChooseEvent();
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3405,6 +3517,7 @@ private int selectedUserDetailsId;
 
     private void clientDetailsAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsAddActionPerformed
         AddClient frm = new AddClient();
+        frm.setCurrentUser(currentUser);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3412,6 +3525,7 @@ private int selectedUserDetailsId;
 
     private void clientDetailsViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsViewActionPerformed
         ViewClient frm = new ViewClient();
+        frm.showClientDetails(selectedClientDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3419,6 +3533,8 @@ private int selectedUserDetailsId;
 
     private void clientDetailsEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsEditActionPerformed
         EditClient frm = new EditClient();
+        frm.showClientDetails(selectedClientDetailsId);
+        frm.setCurrentUser(currentUser);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3447,6 +3563,7 @@ private int selectedUserDetailsId;
 
     private void supplierAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierAddActionPerformed
         AddSupplier frm = new AddSupplier();
+        frm.setCurrentUser(currentUser);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3454,6 +3571,7 @@ private int selectedUserDetailsId;
 
     private void supplierViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierViewActionPerformed
         ViewSupplier frm = new ViewSupplier();
+        frm.showSupplierDetails(selectedSupplierDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3461,6 +3579,8 @@ private int selectedUserDetailsId;
 
     private void supplierEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierEditActionPerformed
         EditSupplier frm = new EditSupplier();
+        frm.setCurrentUser(currentUser);
+        frm.showSupplierDetails(selectedSupplierDetailsId);
         frm.setLocationRelativeTo ( null );
         frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
@@ -3490,7 +3610,6 @@ private int selectedUserDetailsId;
     private void userManAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userManAddActionPerformed
         AddUser frm = new AddUser();
         frm.setLocationRelativeTo ( null );
-        frm.setVisible(true);
         frm.setDefaultCloseOperation(frm.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_userManAddActionPerformed
 
@@ -3578,10 +3697,6 @@ private int selectedUserDetailsId;
         }
     }//GEN-LAST:event_EDsearchKeywordKeyReleased
 
-    private void userDetailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userDetailsTableMouseClicked
-        selectRowUserDetails();
-    }//GEN-LAST:event_userDetailsTableMouseClicked
-
     private void btnUserDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserDeleteActionPerformed
         UserManagementDAO dao = new UserManagementDAO();
         dao.deleteUser(selectedUserDetailsId);
@@ -3591,6 +3706,39 @@ private int selectedUserDetailsId;
         loadUserManagementTable();
         lblStatus.setText("User details table has been refreshed");
     }//GEN-LAST:event_UMRefreshActionPerformed
+
+    private void CMRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CMRefreshActionPerformed
+        loadClientDetailsTable();
+    }//GEN-LAST:event_CMRefreshActionPerformed
+
+    private void clientDetailsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientDetailsMouseClicked
+        selectRowClientDetails();
+    }//GEN-LAST:event_clientDetailsMouseClicked
+
+    private void clientDetailsDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientDetailsDeleteActionPerformed
+        ClientDetailsDAO dao = new ClientDetailsDAO();
+        dao.deleteClient(selectedClientDetailsId);
+        loadClientDetailsTable();
+    }//GEN-LAST:event_clientDetailsDeleteActionPerformed
+
+    private void userDetailsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userDetailsTableMouseClicked
+        selectRowUserDetails();
+    }//GEN-LAST:event_userDetailsTableMouseClicked
+
+    private void supplierRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierRefreshActionPerformed
+        loadSupplierDetailsTable();
+    }//GEN-LAST:event_supplierRefreshActionPerformed
+
+    private void supplierTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_supplierTableMouseClicked
+        selectRowSupplierDetails();
+        System.out.println(selectedSupplierDetailsId);
+    }//GEN-LAST:event_supplierTableMouseClicked
+
+    private void supplierDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierDeleteActionPerformed
+        SupplierDetailsDAO dao = new SupplierDetailsDAO();
+        dao.deleteSupplier(selectedSupplierDetailsId);
+        loadSupplierDetailsTable();
+    }//GEN-LAST:event_supplierDeleteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -3623,6 +3771,7 @@ private int selectedUserDetailsId;
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Home().setVisible(true);
+
             }
         });
     }
@@ -3649,7 +3798,7 @@ private int selectedUserDetailsId;
 
         }
     }
-    
+
     public void loadUserManagementTable() {
 
         UserManagementDAO dao = new UserManagementDAO();
@@ -3657,7 +3806,7 @@ private int selectedUserDetailsId;
 
         userDetailsTable.setModel(new javax.swing.table.DefaultTableModel(
                 data_userManagement, header_userManagement));
-        jScrollPane14.setViewportView(userDetailsTable);
+        jScrollPane17.setViewportView(userDetailsTable);
     }
     
     private void selectRowUserDetails() {
@@ -3673,10 +3822,67 @@ private int selectedUserDetailsId;
         }
         System.out.println("Selected row ID :"+selectedUserDetailsId);
     }
+    
+    public void loadClientDetailsTable() {
+
+        ClientDetailsDAO dao = new ClientDetailsDAO();
+        data_clientDetails = dao.getClientDetails();
+
+        clientDetails.setModel(new javax.swing.table.DefaultTableModel(
+                data_clientDetails, header_clientDetails));
+        jScrollPane4.setViewportView(clientDetails);
+    }
+        
+    private void selectRowClientDetails() {
+
+        //retrieving the selected row index
+        int row = clientDetails.getSelectedRow();
+
+        //if a single row is selected from the table, take each cell values into the controls
+        if (clientDetails.getRowSelectionAllowed()) {
+
+            selectedClientDetailsId = Integer.parseInt(clientDetails.getValueAt(row, 0).toString());
+
+        }
+    }
+    
+        public void loadEmployeeDetailsTable() {
+
+        EmployeeManagementDAO dao = new EmployeeManagementDAO();
+        data_employeeDetails = dao.getEmployeeDetails();
+
+        employeeDetails.setModel(new javax.swing.table.DefaultTableModel(
+                data_employeeDetails, header_employeeDetails));
+        jScrollPane13.setViewportView(employeeDetails);
+    }
+        
+    public void loadSupplierDetailsTable() {
+
+        SupplierDetailsDAO dao = new SupplierDetailsDAO();
+        data_supplierDetails = dao.getSupplierDetails();
+
+        supplierTable.setModel(new javax.swing.table.DefaultTableModel(
+                data_supplierDetails, header_supplierDetails));
+        jScrollPane12.setViewportView(supplierTable);
+    }
+    
+    private void selectRowSupplierDetails() {
+
+        //retrieving the selected row index
+        int row = supplierTable.getSelectedRow();
+
+        //if a single row is selected from the table, take each cell values into the controls
+        if (supplierTable.getRowSelectionAllowed()) {
+
+            selectedSupplierDetailsId = Integer.parseInt(supplierTable.getValueAt(row, 0).toString());
+
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel ActivityPlan;
     private javax.swing.JPanel BasePanel;
+    private javax.swing.JButton CMRefresh;
     private javax.swing.JPanel CardsPanel;
     private javax.swing.JPanel ClientPayments;
     private javax.swing.JPanel ClientsManagement;
@@ -3730,8 +3936,9 @@ private int selectedUserDetailsId;
     private javax.swing.JButton budgetDelete;
     private javax.swing.JButton budgetEdit;
     private javax.swing.JButton budgetView;
+    private javax.swing.JTable clientDetails;
     private javax.swing.JButton clientDetailsAdd;
-    private javax.swing.JButton clientDetailsDetails;
+    private javax.swing.JButton clientDetailsDelete;
     private javax.swing.JButton clientDetailsEdit;
     private javax.swing.JButton clientDetailsView;
     private javax.swing.JButton clientpaymentsAdd;
@@ -3743,6 +3950,7 @@ private int selectedUserDetailsId;
     private javax.swing.JButton comMemberEdit;
     private javax.swing.JButton comMemberView;
     private javax.swing.JButton employeeAdd;
+    private javax.swing.JTable employeeDetails;
     private javax.swing.JButton employeeEdit;
     private javax.swing.JButton employeeView;
     private javax.swing.JButton equipmentPlanAdd;
@@ -3819,13 +4027,10 @@ private int selectedUserDetailsId;
     private javax.swing.JButton jButton55;
     private javax.swing.JButton jButton59;
     private javax.swing.JButton jButton63;
-    private javax.swing.JButton jButton64;
     private javax.swing.JButton jButton69;
-    private javax.swing.JButton jButton70;
     private javax.swing.JButton jButton74;
     private javax.swing.JButton jButton75;
     private javax.swing.JButton jButton79;
-    private javax.swing.JButton jButton88;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox12;
     private javax.swing.JComboBox jComboBox13;
@@ -3838,8 +4043,6 @@ private int selectedUserDetailsId;
     private javax.swing.JComboBox jComboBox20;
     private javax.swing.JComboBox jComboBox21;
     private javax.swing.JComboBox jComboBox22;
-    private javax.swing.JComboBox jComboBox23;
-    private javax.swing.JComboBox jComboBox24;
     private javax.swing.JComboBox jComboBox25;
     private javax.swing.JComboBox jComboBox26;
     private javax.swing.JComboBox jComboBox27;
@@ -3849,8 +4052,6 @@ private int selectedUserDetailsId;
     private javax.swing.JComboBox jComboBox30;
     private javax.swing.JComboBox jComboBox31;
     private javax.swing.JComboBox jComboBox32;
-    private javax.swing.JComboBox jComboBox35;
-    private javax.swing.JComboBox jComboBox36;
     private javax.swing.JComboBox jComboBox4;
     private javax.swing.JComboBox jComboBox7;
     private javax.swing.JComboBox jComboBox8;
@@ -3861,6 +4062,7 @@ private int selectedUserDetailsId;
     private com.toedter.calendar.JDateChooser jDateChooser4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
@@ -3929,9 +4131,9 @@ private int selectedUserDetailsId;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane13;
-    private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -3946,18 +4148,18 @@ private int selectedUserDetailsId;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable10;
     private javax.swing.JTable jTable11;
-    private javax.swing.JTable jTable12;
-    private javax.swing.JTable jTable13;
     private javax.swing.JTable jTable15;
     private javax.swing.JTable jTable16;
     private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
     private javax.swing.JTable jTable6;
     private javax.swing.JTable jTable7;
     private javax.swing.JTable jTable8;
     private javax.swing.JTable jTable9;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblLoggedInUser;
     private javax.swing.JLabel lblStatus;
+    private javax.swing.JLabel lblTime;
     private javax.swing.JButton suppOutsItemAdd;
     private javax.swing.JButton suppOutsItemEdit;
     private javax.swing.JButton suppOutsItemView;
@@ -3965,7 +4167,10 @@ private int selectedUserDetailsId;
     private javax.swing.JButton suppPaymentsEdit;
     private javax.swing.JButton suppPaymentsView;
     private javax.swing.JButton supplierAdd;
+    private javax.swing.JButton supplierDelete;
     private javax.swing.JButton supplierEdit;
+    private javax.swing.JButton supplierRefresh;
+    private javax.swing.JTable supplierTable;
     private javax.swing.JButton supplierView;
     private javax.swing.JTable userDetailsTable;
     private javax.swing.JButton userEdit;

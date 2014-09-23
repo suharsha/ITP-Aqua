@@ -242,6 +242,7 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
         }
         return AttList;
     }
+
     public void updateEvent(EventDetails d,int SelectedID) {
 
 	Connection dbConn = null;
@@ -292,6 +293,7 @@ public String[] getSelectedEventDetailsStrings(int selectedEventID){
             dbConnManager.con_close(dbConn);
         }
     }
+    
     public ArrayList getClientNamesList(){
 
             //arraylist is having behaviours of arrys
