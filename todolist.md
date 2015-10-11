@@ -1,2 +1,2 @@
 #Todo
-- [ ] register the group
+- [x] register the group
